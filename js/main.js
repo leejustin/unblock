@@ -3,7 +3,6 @@
 /*-------------------------------*/
 'use strict';
 
-
 /*******************
  * Manage Settings *
  *******************/
@@ -31,7 +30,6 @@ var RENDERER = {
 
 let GRID_UNITS = 2;
 
-
 /********************
  * Global Variables *
  ********************/
@@ -40,44 +38,6 @@ var scene, camera, mouse, raycaster, renderer;
 
 // Plugins
 var controls, gui, objectTransformControl;
-
-// Scene objects
-//var crate;
-
-// Person objects
-var personMap = {};
-
-/********************
- * Helper Functions *
- ********************/
-function basicFloorGrid(lines, steps, gridColor) {
-  lines = lines || 20;
-  steps = steps || 2;
-  gridColor = gridColor || 0x606060;
-  var floorGrid = new THREE.Geometry();
-  var gridLine = new THREE.LineBasicMaterial( {color: gridColor} );
-  for (var i = -lines; i <= lines; i += steps) {
-    floorGrid.vertices.push(new THREE.Vector3(-lines, 0, i));
-    floorGrid.vertices.push(new THREE.Vector3( lines, 0, i));
-    floorGrid.vertices.push(new THREE.Vector3( i, 0, -lines));
-    floorGrid.vertices.push(new THREE.Vector3( i, 0, lines));
-  }
-  return new THREE.Line(floorGrid, gridLine, THREE.LinePieces);
-}
-
-
-/*
-function basicCrate(size) {
-  size = size || 5;
-  var textureImage = 'assets/texture/crate-small.jpg';
-  var geometry = new THREE.BoxGeometry( size, size, size );
-  var crateTexture = new THREE.ImageUtils.loadTexture( textureImage );
-  var crateMaterial = new THREE.MeshLambertMaterial({ map: crateTexture });
-  var crate = new THREE.Mesh( geometry, crateMaterial );
-  return crate;
-}
-*/
-
 
 /***********************
  * Rendering Functions *
@@ -107,7 +67,6 @@ function addToDOM(object) {
   container.appendChild(object);
 }
 
-
 /************************
  * Scene Initialization *
  ************************/
@@ -135,7 +94,6 @@ function initializeScene() {
   renderer.setSize(canvasWidth, canvasHeight);
   addToDOM(renderer.domElement);
 
-
   /**********************
    * Initialize Plugins *
    **********************/
@@ -146,15 +104,10 @@ function initializeScene() {
   controls.addEventListener('change', renderScene);
 
   // Dat gui (top right controls)
-  gui = new dat.GUI( {height: 5 * 32 - 1} );
+  //gui = new dat.GUI( {height: 5 * 32 - 1} );
 
-
-  /***************
-   * Custom Code *
-   ***************/
-
-  // Example: light sources
-  /*
+  // Set up light source
+  /* -- don't need at the moment
   var lightAmbient = new THREE.AmbientLight(0x666666);
   var lightSource = new THREE.PointLight(0x888888);
   lightSource.position.set(0, 50, 80);
@@ -163,90 +116,62 @@ function initializeScene() {
   */
 
   // Set up the floor grid
-  scene.add(basicFloorGrid(15, GRID_UNITS));
+  scene.add(initializeStageGrid(15, GRID_UNITS));
 
-  /*
-  var crateSize = 5;
-  crate = basicCrate(crateSize);
-  crate.position.set(0, crateSize/2, 0);
-  scene.add(crate);
-  */
-
-  testInitPersons(); // temp
+  // Set up the Persons to be placed on the stage
+  testInitPersons(); //TEMP FOR TESTING
   initializePersons();
 
-
+  // Set up the transform controls to move Persons
   objectTransformControl = new THREE.TransformControls(camera, renderer.domElement);
   objectTransformControl.setTranslationSnap(GRID_UNITS);
-
-
   objectTransformControl.addEventListener('change', transformPerson);
-  objectTransformControl.attach(personMap["pid_0"].meshObject);
   scene.add(objectTransformControl);
 
-
-
-
-  //* test raycaster mouse clicks
+  // Set up raycaster to detect clicks on objects
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();
-
   document.addEventListener( 'mousedown', onDocumentMouseDown, false);
 }
 
+//Used to update a person's coordinates after being moved by the transform controller
+function transformPerson() {
+  console.log("pid of transformed person: " + pid);
+  var horizontal = objectTransformControl.position.x;
+  var vertical = objectTransformControl.position.z;
+  var pid = objectTransformControl.object.name;
+
+  var person = personMap[pid];
+  person.setPosition(horizontal, vertical);
+}
 
 function onDocumentMouseDown(event) {
   //event.preventDefault();
-
   var rect = renderer.domElement.getBoundingClientRect();
-  /*
-  mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1.2;
-  */
   mouse.x = ( ( event.clientX - rect.left ) / rect.width ) * 2 - 1;
   mouse.y = - ( ( event.clientY - rect.top ) / rect.height ) * 2 + 1;
-
   raycaster.setFromCamera( mouse, camera );
 
-  
+  //TODO intersectObjects only takes an array as a param...might become an issue
+  //to reinitialize this array every single time.
   var personArray = [];
   for (var key in personMap) {
     personArray.push(personMap[key].meshObject);
   }
   var intersects = raycaster.intersectObjects(personArray);
+
+  //Object was clicked
   if ( intersects.length > 0 ) {
-    console.log(intersects);
-    console.log(intersects[0].object.name);
-    console.log(intersects[0].object.position);
-    //intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
-    /*
-    var particleMaterial = new THREE.SpriteCanvasMaterial( {
-
-					color: 0x000000,
-					program: function ( context ) {
-
-						context.beginPath();
-						context.arc( 0, 0, 0.5, 0, PI2, true );
-						context.fill();
-
-					}
-
-				} );
-    var particle = new THREE.Sprite( particleMaterial );
-    particle.position.copy( intersects[ 0 ].point );
-    particle.scale.x = particle.scale.y = 16;
-    scene.add( particle );
-    */
-    console.log("TRUE!!");
+    console.log("Object " + intersects[0].object.name + " was clicked");
+    objectTransformControl.attach(intersects[0].object);
   }
 }
 
-
-/******* JUST FOR TESTING  */
+/******* DUMP OF TEMPORARY TESTING STUFF ********/
 function testInitPersons() {
-  personMap["pid_0"] = new Person(0,0,"justin")
-  personMap["pid_1"] = new Person(4,3,"hello")
-  personMap["pid_2"] = new Person(-3,-6,"Taco")
+  personMap["pid_0"] = new Person(0,0,"justin", "pid_0");
+  personMap["pid_1"] = new Person(4,3,"hello", "pid_1");
+  personMap["pid_2"] = new Person(-3,-6,"Taco", "pid_2");
 }
 
 function test() {
@@ -266,90 +191,9 @@ function testTwo() {
   objectTransformControl.position;
   //objectTransformControl.detach();
 
-  //persons[0].updatePosition(objectTransformControt)
+  //persons[0].setPosition(objectTransformControt)
 }
-
-/*********************** */
-
-function transformPerson() {
-  var horizontal = objectTransformControl.position.x;
-  var vertical = objectTransformControl.position.z;
-  var name = objectTransformControl.object.name;
-
-  var person = personMap["pid_0"];  //TODO figure out best way to reference person
-  person.updatePosition(horizontal, vertical);
-
-}
-
-
-
-
-
-
-//TODO - add function that will only add a single unit instead of redrawing the entire board
-
-/* Redraws the entire board with person objects -- board should be cleared first */
-function initializePersons() {
-  for (var key in personMap) {
-    scene.add(personMap[key].meshObject);
-  }
-}
-
-/* Clears the stage of all person objects */ 
-function removeAllPersons() {
-  for (var key in personMap) {
-    var selectedObject = scene.getObjectByName(personMap[key].name);
-    scene.remove(selectedObject);
-  }
-}
-
-//TODO - should only add a person and not actually redraw the entire board
-function addPerson() {
-  removeAllPersons();
-
-  var numPersons = Object.keys(personMap).length;
-  var toAdd = new Person(-12,-12,"name" + numPersons);
-  personMap["pid_" + numPersons] = toAdd;
-
-  initializePersons();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let personGeometry = new THREE.SphereGeometry(1, 32, 32);
-let personMaterial = new THREE.MeshBasicMaterial( {color: 0x42a4f4} );
-const personSize = 1;
- 
-class Person {
-  constructor(coordHorizontal, coordVertical, name) {
-    this.name = name;
-    this.coordHorizontal = coordHorizontal;
-    this.coordVertical = coordVertical;
-
-    this.meshObject = new THREE.Mesh(personGeometry, personMaterial);
-    this.meshObject.position.set(this.coordHorizontal, 1, this.coordVertical);
-    this.meshObject.name = name;
-  }
-
-  updatePosition(updatedHorizontal, updatedVertical) {
-    this.coordHorizontal = updatedHorizontal;
-    this.coordVertical = updatedVertical;
-    this.meshObject.position.set(this.coordHorizontal, 1, this.coordVertical);
-  }
-}
-
+/******** END TESTING STUFF *************** */
 
 /**********************
  * Render and Animate *
