@@ -9,19 +9,10 @@ var personMap = {};
 let spawnPersonHorizontal = -12;
 let spawnPersonVertical = -12;
 
-function initializeStageGrid(lines, steps, gridColor) {
-  lines = lines || 20;
-  steps = steps || 2;
-  gridColor = gridColor || 0x000000;
-  var stageGrid = new THREE.Geometry();
-  var gridLine = new THREE.LineBasicMaterial( {color: gridColor} );
-  for (var i = -lines; i <= lines; i += steps) {
-    stageGrid.vertices.push(new THREE.Vector3(-lines, 0, i));
-    stageGrid.vertices.push(new THREE.Vector3( lines, 0, i));
-    stageGrid.vertices.push(new THREE.Vector3( i, 0, -lines));
-    stageGrid.vertices.push(new THREE.Vector3( i, 0, lines));
-  }
-  return new THREE.Line(stageGrid, gridLine, THREE.LinePieces);
+let stageSize = 40;
+
+function initializeStageGrid() {
+    return new THREE.GridHelper( stageSize, stageSize/2 );
 }
 
 function initializeStageMaterial() {
