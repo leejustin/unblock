@@ -105,15 +105,6 @@ function initializeScene() {
   // Dat gui (top right controls)
   //gui = new dat.GUI( {height: 5 * 32 - 1} );
 
-  // Set up light source
-  /* -- don't need at the moment
-  var lightAmbient = new THREE.AmbientLight(0x666666);
-  var lightSource = new THREE.PointLight(0x888888);
-  lightSource.position.set(0, 50, 80);
-  scene.add(lightAmbient);
-  scene.add(lightSource);
-  */
-
   // Set up the floor grid and texture
   initializeStageGrid();
   initializeStageMaterial();
