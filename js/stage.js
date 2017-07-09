@@ -54,6 +54,19 @@ function removeAllPersons() {
     }
 }
 
+/* Removes a single person */
+function removePerson(pid) {
+    var toRemove = personMap[pid];
+
+    //Detach the transform control if it's attached to this Person
+    if (objectTransformControl.position.x == toRemove.position.x && 
+        objectTransformControl.position.y == toRemove.position.y) {
+        objectTransformControl.detach();
+    }
+    scene.remove(toRemove);
+    delete personMap[pid];
+}
+
 /* Create and add a person to the spawn location */
 function addPerson() {
     var numPersons = Object.keys(personMap).length;
