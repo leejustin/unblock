@@ -12,7 +12,7 @@ let spawnPersonVertical = -12;
 function initializeStageGrid(lines, steps, gridColor) {
   lines = lines || 20;
   steps = steps || 2;
-  gridColor = gridColor || 0x606060;
+  gridColor = gridColor || 0x000000;
   var stageGrid = new THREE.Geometry();
   var gridLine = new THREE.LineBasicMaterial( {color: gridColor} );
   for (var i = -lines; i <= lines; i += steps) {
@@ -22,6 +22,40 @@ function initializeStageGrid(lines, steps, gridColor) {
     stageGrid.vertices.push(new THREE.Vector3( i, 0, lines));
   }
   return new THREE.Line(stageGrid, gridLine, THREE.LinePieces);
+}
+
+function initializeStageMaterial() {
+    /*
+  var textureImage = 'assets/texture/crate-small.jpg';
+  var geometry = new THREE.BoxGeometry( size, size, size );
+  var crateTexture = new THREE.ImageUtils.loadTexture( textureImage );
+  var crateMaterial = new THREE.MeshLambertMaterial({ map: crateTexture });
+  var crate = new THREE.Mesh( geometry, crateMaterial );
+  return crate;
+  */
+
+    var texture, material, plane;
+
+    texture = THREE.TextureLoader( 'assets/texture/crate-small.jpg' );
+
+    // assuming you want the texture to repeat in both directions:
+    //texture.wrapS = THREE.RepeatWrapping; 
+    //texture.wrapT = THREE.RepeatWrapping;
+
+    // how many times to repeat in each direction; the default is (1,1),
+    //   which is probably why your example wasn't working
+    texture.repeat.set( 4, 4 ); 
+
+    material = new THREE.MeshLambertMaterial({ map : texture });
+    plane = new THREE.Mesh(new THREE.PlaneGeometry(1400, 3500), material);
+    plane.material.side = THREE.DoubleSide;
+    plane.position.x = 100;
+
+    // rotation.z is rotation around the z-axis, measured in radians (rather than degrees)
+    // Math.PI = 180 degrees, Math.PI / 2 = 90 degrees, etc.
+    plane.rotation.z = Math.PI / 2;
+
+    scene.add(plane);
 }
 
 /* Redraws the entire board with person objects -- board should be cleared first */
@@ -49,4 +83,15 @@ function addPerson() {
 
   objectTransformControl.attach(toAdd.meshObject);
   scene.add(toAdd.meshObject);
+}
+
+/* TODO: break this into a service layer once we get a bit more organized with framework decisions, etc...*/
+
+/* Store the Persons that are on the stage*/
+function saveStagePersons() {
+  //TODO: look at some proper deep copying
+  //TODO: need to set up extra functionality to only store the person data without meshes
+  var toStore = JSON.parse(JSON.stringify(personMap));
+  
+  return toStore;
 }

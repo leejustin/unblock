@@ -28,7 +28,7 @@ var RENDERER = {
   antialias : false,
 };
 
-let GRID_UNITS = 2;
+let GRID_UNITS = 1;
 
 /********************
  * Global Variables *
@@ -71,7 +71,6 @@ function addToDOM(object) {
  * Scene Initialization *
  ************************/
 function initializeScene() {
-
   /*************************
    * Initialize Essentials *
    *************************/
@@ -116,7 +115,8 @@ function initializeScene() {
   */
 
   // Set up the floor grid
-  scene.add(initializeStageGrid(15, GRID_UNITS));
+	scene.add( initializeStageGrid() );
+  scene.background = new THREE.Color( 0xffffff );
 
   // Set up the Persons to be placed on the stage
   testInitPersons(); //TEMP FOR TESTING
@@ -136,10 +136,10 @@ function initializeScene() {
 
 //Used to update a person's coordinates after being moved by the transform controller
 function transformPerson() {
-  console.log("pid of transformed person: " + pid);
   var horizontal = objectTransformControl.position.x;
   var vertical = objectTransformControl.position.z;
   var pid = objectTransformControl.object.name;
+  console.log("pid of transformed person: " + pid);
 
   var person = personMap[pid];
   person.setPosition(horizontal, vertical);
