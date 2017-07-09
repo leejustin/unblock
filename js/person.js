@@ -5,8 +5,6 @@ class Person extends THREE.Mesh {
     
         super(personGeometry, personMaterial);
         this.alias = alias;
-
         this.position.set(coordHorizontal, 1, coordVertical);
-        //this.name = pid;
     }
 }
