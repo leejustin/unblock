@@ -114,8 +114,9 @@ function initializeScene() {
   scene.add(lightSource);
   */
 
-  // Set up the floor grid
-	scene.add( initializeStageGrid() );
+  // Set up the floor grid and texture
+	initializeStageGrid();
+  //initializeStageMaterial();
   scene.background = new THREE.Color( 0xffffff );
 
   // Set up the Persons to be placed on the stage

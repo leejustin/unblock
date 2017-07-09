@@ -12,41 +12,28 @@ let spawnPersonVertical = -12;
 let stageSize = 40;
 
 function initializeStageGrid() {
-    return new THREE.GridHelper( stageSize, stageSize/2 );
+    var gridHelper = new THREE.GridHelper( stageSize, stageSize/2 );
+    //gridHelper.position.y = 1;
+    scene.add(gridHelper);
 }
 
 function initializeStageMaterial() {
-    /*
-  var textureImage = 'assets/texture/crate-small.jpg';
-  var geometry = new THREE.BoxGeometry( size, size, size );
-  var crateTexture = new THREE.ImageUtils.loadTexture( textureImage );
-  var crateMaterial = new THREE.MeshLambertMaterial({ map: crateTexture });
-  var crate = new THREE.Mesh( geometry, crateMaterial );
-  return crate;
-  */
+    var textureLoader = new THREE.TextureLoader();
+    var maxAnisotropy = renderer.getMaxAnisotropy();
 
-    var texture, material, plane;
+    var texture = textureLoader.load( "assets/texture/hardwood-smaller.jpg" );
+    var material = new THREE.MeshBasicMaterial( { map: texture } );
 
-    texture = THREE.TextureLoader( 'assets/texture/crate-small.jpg' );
+    texture.anisotropy = maxAnisotropy;
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set( 1, 40 ); //Creates the floorboard design
 
-    // assuming you want the texture to repeat in both directions:
-    //texture.wrapS = THREE.RepeatWrapping; 
-    //texture.wrapT = THREE.RepeatWrapping;
+    var geometry = new THREE.PlaneGeometry( stageSize, stageSize );
 
-    // how many times to repeat in each direction; the default is (1,1),
-    //   which is probably why your example wasn't working
-    texture.repeat.set( 4, 4 ); 
-
-    material = new THREE.MeshLambertMaterial({ map : texture });
-    plane = new THREE.Mesh(new THREE.PlaneGeometry(1400, 3500), material);
-    plane.material.side = THREE.DoubleSide;
-    plane.position.x = 100;
-
-    // rotation.z is rotation around the z-axis, measured in radians (rather than degrees)
-    // Math.PI = 180 degrees, Math.PI / 2 = 90 degrees, etc.
-    plane.rotation.z = Math.PI / 2;
-
-    scene.add(plane);
+    var mesh = new THREE.Mesh( geometry, material );
+    mesh.rotation.x = - Math.PI / 2;
+    //mesh1.scale.set( 2, 2, 2 );
+    scene.add( mesh );
 }
 
 /* Redraws the entire board with person objects -- board should be cleared first */
