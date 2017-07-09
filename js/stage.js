@@ -3,7 +3,7 @@
  * (such as persons) are placed. 
  */
 
-var personMap = {};
+var personArray = [];
 
 //TODO: do we want to move to DI and add to scene here? Or just use this to pass things back
 
@@ -40,38 +40,42 @@ function initializeStageMaterial() {
 
 /* Redraws the entire board with person objects -- board should be cleared first */
 function initializePersons() {
-    for (var key in personMap) {
-        scene.add(personMap[key]);
+    for (person of personArray) {
+        scene.add(person);
     }
 }
 
 /* Clears the stage of all person objects */
 function removeAllPersons() {
     objectTransformControl.detach();
-
-    for (var key in personMap) {
-        scene.remove(personMap[key]);
+    
+    for (person of personArray) {
+        scene.remove(person);
     }
 }
 
 /* Removes a single person */
 function removePerson(pid) {
-    var toRemove = personMap[pid];
+    var toRemove = scene.getObjectById(pid);
 
     //Detach the transform control if it's attached to this Person
     if (objectTransformControl.position.x == toRemove.position.x && 
         objectTransformControl.position.y == toRemove.position.y) {
         objectTransformControl.detach();
     }
+
     scene.remove(toRemove);
-    delete personMap[pid];
+    for (var i = 0; i < personArray.length; i++) {
+        if (personArray[i] == toRemove) {
+            personArray.splice(i,1);
+        }
+    }
 }
 
 /* Create and add a person to the spawn location */
-function addPerson() {
-    var numPersons = Object.keys(personMap).length;
-    var toAdd = new Person(spawnPersonHorizontal, spawnPersonVertical, "name" + numPersons, "pid_" + numPersons);
-    personMap["pid_" + numPersons] = toAdd;
+function addPerson(alias = "no_alias") {
+    var toAdd = new Person(spawnPersonHorizontal, spawnPersonVertical, alias);
+    personArray.push(toAdd);
 
     objectTransformControl.attach(toAdd);
     scene.add(toAdd);
@@ -83,7 +87,7 @@ function addPerson() {
 function saveStagePersons() {
     //TODO: look at some proper deep copying
     //TODO: need to set up extra functionality to only store the person data without meshes
-    var toStore = JSON.parse(JSON.stringify(personMap));
+    //var toStore = JSON.parse(JSON.stringify(personMap));
 
     return toStore;
 }

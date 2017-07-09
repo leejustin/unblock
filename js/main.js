@@ -116,7 +116,7 @@ function initializeScene() {
 
   // Set up the floor grid and texture
   initializeStageGrid();
-  //initializeStageMaterial();
+  initializeStageMaterial();
   scene.background = new THREE.Color(0xffffff);
 
   // Set up the Persons to be placed on the stage
@@ -139,10 +139,10 @@ function initializeScene() {
 function transformPerson() {
   var horizontal = objectTransformControl.position.x;
   var vertical = objectTransformControl.position.z;
-  var pid = objectTransformControl.object.name;
+  var pid = objectTransformControl.object.id;
   console.log("pid of transformed person: " + pid);
 
-  var person = personMap[pid];
+  var person = scene.getObjectById(pid);
   person.position.set(horizontal, 1, vertical);
   
   //setPosition(horizontal, vertical);
@@ -155,12 +155,6 @@ function onDocumentMouseDown(event) {
   mouse.y = - ((event.clientY - rect.top) / rect.height) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
 
-  //TODO intersectObjects only takes an array as a param...might become an issue
-  //to reinitialize this array every single time.
-  var personArray = [];
-  for (var key in personMap) {
-    personArray.push(personMap[key]);
-  }
   var intersects = raycaster.intersectObjects(personArray);
 
   //Object was clicked
@@ -172,9 +166,9 @@ function onDocumentMouseDown(event) {
 
 /******* DUMP OF TEMPORARY TESTING STUFF ********/
 function testInitPersons() {
-  personMap["pid_0"] = new Person(0, 0, "justin", "pid_0");
-  personMap["pid_1"] = new Person(4, 3, "hello", "pid_1");
-  personMap["pid_2"] = new Person(-3, -6, "Taco", "pid_2");
+  personArray.push(new Person(0, 0, "justin"));
+  personArray.push(new Person(4, 3, "hello"));
+  personArray.push(new Person(-3, -6, "Taco"));
 }
 
 function test() {

@@ -1,5 +1,5 @@
 class Person extends THREE.Mesh {
-    constructor(coordHorizontal, coordVertical, alias, pid) {
+    constructor(coordHorizontal, coordVertical, alias) {
         var personGeometry = new THREE.SphereGeometry(1, 32, 32);
         var personMaterial = new THREE.MeshBasicMaterial({ color: 0x42a4f4 });
     
@@ -7,6 +7,6 @@ class Person extends THREE.Mesh {
         this.alias = alias;
 
         this.position.set(coordHorizontal, 1, coordVertical);
-        this.name = pid;
+        //this.name = pid;
     }
 }
