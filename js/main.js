@@ -143,7 +143,9 @@ function transformPerson() {
   console.log("pid of transformed person: " + pid);
 
   var person = personMap[pid];
-  person.setPosition(horizontal, vertical);
+  person.position.set(horizontal, 1, vertical);
+  
+  //setPosition(horizontal, vertical);
 }
 
 function onDocumentMouseDown(event) {
@@ -157,7 +159,7 @@ function onDocumentMouseDown(event) {
   //to reinitialize this array every single time.
   var personArray = [];
   for (var key in personMap) {
-    personArray.push(personMap[key].meshObject);
+    personArray.push(personMap[key]);
   }
   var intersects = raycaster.intersectObjects(personArray);
 
@@ -181,19 +183,6 @@ function test() {
   //test_updateLocation(objectTransformControl.object);
 }
 
-function test_updateLocation(attachedObject) {
-  //console.log(attachedObject.name);
-
-  //objectTransformControl.object;
-}
-
-function testTwo() {
-  console.log(objectTransformControl);
-  objectTransformControl.position;
-  //objectTransformControl.detach();
-
-  //persons[0].setPosition(objectTransformControt)
-}
 /******** END TESTING STUFF *************** */
 
 /**********************

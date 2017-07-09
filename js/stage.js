@@ -5,6 +5,8 @@
 
 var personMap = {};
 
+//TODO: do we want to move to DI and add to scene here? Or just use this to pass things back
+
 //Coordinates where a person will spawn
 let spawnPersonHorizontal = -12;
 let spawnPersonVertical = -12;
@@ -39,7 +41,7 @@ function initializeStageMaterial() {
 /* Redraws the entire board with person objects -- board should be cleared first */
 function initializePersons() {
     for (var key in personMap) {
-        scene.add(personMap[key].meshObject);
+        scene.add(personMap[key]);
     }
 }
 
@@ -48,8 +50,7 @@ function removeAllPersons() {
     objectTransformControl.detach();
 
     for (var key in personMap) {
-        var selectedObject = scene.getObjectByName(personMap[key].pid);
-        scene.remove(selectedObject);
+        scene.remove(personMap[key]);
     }
 }
 
@@ -59,8 +60,8 @@ function addPerson() {
     var toAdd = new Person(spawnPersonHorizontal, spawnPersonVertical, "name" + numPersons, "pid_" + numPersons);
     personMap["pid_" + numPersons] = toAdd;
 
-    objectTransformControl.attach(toAdd.meshObject);
-    scene.add(toAdd.meshObject);
+    objectTransformControl.attach(toAdd);
+    scene.add(toAdd);
 }
 
 /* TODO: break this into a service layer once we get a bit more organized with framework decisions, etc...*/
