@@ -2,7 +2,7 @@
  * A stage is conceptually the 2D plane where objects 
  * (such as persons) are placed. 
  */
-
+var formations = [];    //use formations to hold a personArray
 var personArray = [];
 
 //TODO: do we want to move to DI and add to scene here? Or just use this to pass things back
@@ -40,6 +40,9 @@ function initializeStageMaterial() {
 
 /* Redraws the entire board with person objects -- board should be cleared first */
 function initializePersons() {
+    if (formations.length < 1) {
+        formations.push(personArray);
+    }
     for (person of personArray) {
         scene.add(person);
     }
@@ -81,13 +84,27 @@ function addPerson(alias = "no_alias") {
     scene.add(toAdd);
 }
 
-/* TODO: break this into a service layer once we get a bit more organized with framework decisions, etc...*/
+/* Set the current formation to a new or existing one.  Return the index of the newly-created formation */
+function createAndSetFormation(formationIndex = null) {
+    var personArrayToUse;
 
-/* Store the Persons that are on the stage*/
-function saveStagePersons() {
-    //TODO: look at some proper deep copying
-    //TODO: need to set up extra functionality to only store the person data without meshes
-    //var toStore = JSON.parse(JSON.stringify(personMap));
+    if (formationIndex != null && formationIndex < formations.length) {
+        personArrayToUse = clonePersonArray(formations[formationIndex]);
+        //console.log(personArrayToUse);
+    } else {
+        personArrayToUse = new Array();
+    }
 
-    return toStore;
+    formations.push(personArrayToUse);
+    var createdFormationIndex = formations.length - 1;
+    console.log("Created formation at index: " + createdFormationIndex);
+
+    setFormation(createdFormationIndex);
+    return createdFormationIndex;
+}
+
+function setFormation(formationIndex) {
+    removeAllPersons();
+    personArray = formations[formationIndex];
+    initializePersons();
 }
