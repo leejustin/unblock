@@ -5,6 +5,12 @@
 var formations = [];    //use formations to hold a personArray
 var personArray = [];
 
+var gridHelper;
+var stageMesh;
+
+var gridHelperIsVisible;
+var stageMeshIsVisible;
+
 //Coordinates where a person will spawn
 let spawnPersonHorizontal = -12;
 let spawnPersonVertical = -12;
@@ -12,9 +18,20 @@ let spawnPersonVertical = -12;
 let stageSize = 40;
 
 function initializeStageGrid() {
-    var gridHelper = new THREE.GridHelper(stageSize, stageSize / 2);
+    gridHelper = new THREE.GridHelper(stageSize, stageSize / 2);
     //gridHelper.position.y = 1;
+    gridHelperIsVisible = true;
     scene.add(gridHelper);
+}
+
+function toggleStageGrid() {
+    if (gridHelperIsVisible) {
+        gridHelperIsVisible = false;
+        scene.remove(gridHelper);
+    } else {
+        gridHelperIsVisible = true;
+        scene.add(gridHelper);
+    }
 }
 
 function initializeStageMaterial() {
@@ -30,10 +47,10 @@ function initializeStageMaterial() {
 
     var geometry = new THREE.PlaneGeometry(stageSize, stageSize);
 
-    var mesh = new THREE.Mesh(geometry, material);
-    mesh.rotation.x = - Math.PI / 2;
+    stageMesh = new THREE.Mesh(geometry, material);
+    stageMesh.rotation.x = - Math.PI / 2;
     //mesh1.scale.set( 2, 2, 2 );
-    scene.add(mesh);
+    scene.add(stageMesh);
 }
 
 /* Redraws the entire board with person objects -- board should be cleared first */

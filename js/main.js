@@ -11,8 +11,8 @@ var CAMERA = {
   near: window.innerWidth / window.innerHeight,
   far: 1000,
   zoomX: 0,//-0.25,
-  zoomY: 40,//27,
-  zoomZ: 40,//48,
+  zoomY: 20,//27,
+  zoomZ: 30,//48,
 };
 
 var CONTROLS = {
