@@ -11,8 +11,8 @@ var CAMERA = {
   near: window.innerWidth / window.innerHeight,
   far: 1000,
   zoomX: 0,//-0.25,
-  zoomY: 60,//27,
-  zoomZ: 60,//48,
+  zoomY: 40,//27,
+  zoomZ: 40,//48,
 };
 
 var CONTROLS = {
@@ -78,8 +78,9 @@ function initializeScene() {
   // Scene and window resize listener
   scene = new THREE.Scene();
   var canvasWidth = window.innerWidth;
-  var canvasHeight = window.innerHeight;
+  var canvasHeight = window.innerHeight * 0.8;
   window.addEventListener('resize', resizeWindow, false);
+
 
   // Camera and set initial view
   var aspectRatio = canvasWidth / canvasHeight;
@@ -176,5 +177,3 @@ function testInitPersons() {
  **********************/
 initializeScene();
 animateScene();
-
-//TODO -- add camera controls to change to different views, such as close up, audience angle, etc.
