@@ -5,8 +5,6 @@
 var formations = [];    //use formations to hold a personArray
 var personArray = [];
 
-//TODO: do we want to move to DI and add to scene here? Or just use this to pass things back
-
 //Coordinates where a person will spawn
 let spawnPersonHorizontal = -12;
 let spawnPersonVertical = -12;
