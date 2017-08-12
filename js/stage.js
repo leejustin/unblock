@@ -74,18 +74,20 @@ function removeAllPersons() {
 
 /* Removes a single person */
 function removePerson(pid) {
-    var toRemove = scene.getObjectById(pid);
+    if (pid != null) {
+        var toRemove = scene.getObjectById(pid);
 
-    //Detach the transform control if it's attached to this Person
-    if (objectTransformControl.position.x == toRemove.position.x && 
-        objectTransformControl.position.y == toRemove.position.y) {
-        objectTransformControl.detach();
-    }
+        //Detach the transform control if it's attached to this Person
+        if (objectTransformControl.position.x == toRemove.position.x && 
+            objectTransformControl.position.y == toRemove.position.y) {
+            objectTransformControl.detach();
+        }
 
-    scene.remove(toRemove);
-    for (var i = 0; i < personArray.length; i++) {
-        if (personArray[i] == toRemove) {
-            personArray.splice(i,1);
+        scene.remove(toRemove);
+        for (var i = 0; i < personArray.length; i++) {
+            if (personArray[i] == toRemove) {
+                personArray.splice(i,1);
+            }
         }
     }
 }
@@ -97,6 +99,15 @@ function addPerson(alias = "no_alias") {
 
     objectTransformControl.attach(toAdd);
     scene.add(toAdd);
+}
+
+/* Return the id of the person with the object transform */
+function getSelectedPerson() {
+    try {
+        return objectTransformControl.object.id;
+    } catch(e) {
+        return;
+    }
 }
 
 /* Set the current formation to a new or existing one.  Return the index of the newly-created formation */
