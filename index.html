@@ -36,7 +36,23 @@
             </div>
             <div class="col-md-4">
                 <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add Formation</button>
-                <button type="button" class="btn btn-primary" onclick="setFormation()" disabled>Change Formation</button>
+                <!--
+                <span class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="formation-dropdown">Change Formation
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li value="0"><a href="#">Form 1</a></li>
+                        <li value="1"><a href="#">Form 2</a></li>
+                        <li value="2"><a href="#">Form 3</a></li>
+                    </ul>
+                </span>
+                -->
+                <span>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+                </span>
             </div>
             <div class="col-md-4">            
                 <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Remove All</button>

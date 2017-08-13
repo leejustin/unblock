@@ -99,7 +99,7 @@ function initializeScene() {
    **********************/
 
   // OrbitControls using mouse
-  controls = new THREE.OrbitControls(camera);
+  controls = new THREE.OrbitControls(camera, renderer.domElement);
   for (var key in CONTROLS) { controls[key] = CONTROLS[key]; }
   controls.addEventListener('change', renderScene);
 				var ambientLight = new THREE.AmbientLight( Math.random() * 0x202020 );
