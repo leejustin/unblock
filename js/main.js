@@ -102,13 +102,13 @@ function initializeScene() {
   controls = new THREE.OrbitControls(camera, renderer.domElement);
   for (var key in CONTROLS) { controls[key] = CONTROLS[key]; }
   controls.addEventListener('change', renderScene);
-				var ambientLight = new THREE.AmbientLight( Math.random() * 0x202020 );
-				scene.add( ambientLight );
-				var directionalLight = new THREE.DirectionalLight( Math.random() * 0xffffff );
-				directionalLight.position.set( 0, 1, 0 );
-				scene.add( directionalLight );
-				var light = new THREE.PointLight( 0xff0000, 1, 500 );
-				scene.add( light );
+  var ambientLight = new THREE.AmbientLight(Math.random() * 0x202020);
+  scene.add(ambientLight);
+  var directionalLight = new THREE.DirectionalLight(Math.random() * 0xffffff);
+  directionalLight.position.set(0, 1, 0);
+  scene.add(directionalLight);
+  var light = new THREE.PointLight(0xff0000, 1, 500);
+  scene.add(light);
 
   // Dat gui (top right controls)
   //gui = new dat.GUI( {height: 5 * 32 - 1} );
@@ -143,7 +143,7 @@ function transformPerson() {
 
   var person = scene.getObjectById(pid);
   person.position.set(horizontal, 1, vertical);
-  
+
   //setPosition(horizontal, vertical);
 }
 

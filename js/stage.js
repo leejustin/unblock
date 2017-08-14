@@ -65,7 +65,7 @@ function initializePersons() {
 /* Clears the stage of all person objects */
 function removeAllPersons() {
     objectTransformControl.detach();
-    
+
     for (person of personArray) {
         scene.remove(person);
     }
@@ -77,7 +77,7 @@ function removePerson(pid) {
         var toRemove = scene.getObjectById(pid);
 
         //Detach the transform control if it's attached to this Person
-        if (objectTransformControl.position.x == toRemove.position.x && 
+        if (objectTransformControl.position.x == toRemove.position.x &&
             objectTransformControl.position.y == toRemove.position.y) {
             objectTransformControl.detach();
         }
@@ -85,7 +85,7 @@ function removePerson(pid) {
         scene.remove(toRemove);
         for (var i = 0; i < personArray.length; i++) {
             if (personArray[i] == toRemove) {
-                personArray.splice(i,1);
+                personArray.splice(i, 1);
             }
         }
     }
@@ -104,7 +104,7 @@ function addPerson(alias = "no_alias") {
 function getSelectedPerson() {
     try {
         return objectTransformControl.object.id;
-    } catch(e) {
+    } catch (e) {
         return;
     }
 }
