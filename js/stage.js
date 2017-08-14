@@ -2,7 +2,6 @@
  * A stage is conceptually the 2D plane where objects 
  * (such as persons) are placed. 
  */
-var formations = [];    //use formations to hold a personArray
 var personArray = [];
 
 var gridHelper;
@@ -38,7 +37,12 @@ function initializeStageMaterial() {
     var textureLoader = new THREE.TextureLoader();
     var maxAnisotropy = renderer.getMaxAnisotropy();
 
-    var texture = textureLoader.load("assets/texture/hardwood-smaller.jpg");
+    //var texture = textureLoader.load("assets/texture/hardwood-smaller.jpg");
+    var texture = new THREE.Texture();
+    texture.image = hardwood_smaller_image;
+    hardwood_smaller_image.onload = function() {
+	    texture.needsUpdate = true;
+    };
     var material = new THREE.MeshBasicMaterial({ map: texture });
 
     texture.anisotropy = maxAnisotropy;
@@ -50,7 +54,18 @@ function initializeStageMaterial() {
     stageMesh = new THREE.Mesh(geometry, material);
     stageMesh.rotation.x = - Math.PI / 2;
     //mesh1.scale.set( 2, 2, 2 );
+    stageMeshIsVisible = true;
     scene.add(stageMesh);
+}
+
+function toggleStageMesh() {
+    if (stageMeshIsVisible) {
+        stageMeshIsVisible = false;
+        scene.remove(stageMesh);
+    } else {
+        stageMeshIsVisible = true;
+        scene.add(stageMesh);
+    }
 }
 
 /* Redraws the entire board with person objects -- board should be cleared first */
@@ -66,7 +81,7 @@ function initializePersons() {
 /* Clears the stage of all person objects */
 function removeAllPersons() {
     objectTransformControl.detach();
-    
+
     for (person of personArray) {
         scene.remove(person);
     }
@@ -74,18 +89,20 @@ function removeAllPersons() {
 
 /* Removes a single person */
 function removePerson(pid) {
-    var toRemove = scene.getObjectById(pid);
+    if (pid != null) {
+        var toRemove = scene.getObjectById(pid);
 
-    //Detach the transform control if it's attached to this Person
-    if (objectTransformControl.position.x == toRemove.position.x && 
-        objectTransformControl.position.y == toRemove.position.y) {
-        objectTransformControl.detach();
-    }
+        //Detach the transform control if it's attached to this Person
+        if (objectTransformControl.position.x == toRemove.position.x &&
+            objectTransformControl.position.y == toRemove.position.y) {
+            objectTransformControl.detach();
+        }
 
-    scene.remove(toRemove);
-    for (var i = 0; i < personArray.length; i++) {
-        if (personArray[i] == toRemove) {
-            personArray.splice(i,1);
+        scene.remove(toRemove);
+        for (var i = 0; i < personArray.length; i++) {
+            if (personArray[i] == toRemove) {
+                personArray.splice(i, 1);
+            }
         }
     }
 }
@@ -99,27 +116,11 @@ function addPerson(alias = "no_alias") {
     scene.add(toAdd);
 }
 
-/* Set the current formation to a new or existing one.  Return the index of the newly-created formation */
-function createAndSetFormation(formationIndex = null) {
-    var personArrayToUse;
-
-    if (formationIndex != null && formationIndex < formations.length) {
-        personArrayToUse = clonePersonArray(formations[formationIndex]);
-        //console.log(personArrayToUse);
-    } else {
-        personArrayToUse = new Array();
+/* Return the id of the person with the object transform */
+function getSelectedPerson() {
+    try {
+        return objectTransformControl.object.id;
+    } catch (e) {
+        return;
     }
-
-    formations.push(personArrayToUse);
-    var createdFormationIndex = formations.length - 1;
-    console.log("Created formation at index: " + createdFormationIndex);
-
-    setFormation(createdFormationIndex);
-    return createdFormationIndex;
-}
-
-function setFormation(formationIndex) {
-    removeAllPersons();
-    personArray = formations[formationIndex];
-    initializePersons();
 }
