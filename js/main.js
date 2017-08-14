@@ -19,7 +19,7 @@ var CAMERA_BIRD = {
   fov: 45,
   near: window.innerWidth / window.innerHeight,
   far: 1000,
-  zoomX: -2,
+  zoomX: 0,
   zoomY: 55,
   zoomZ: 0,
 };
