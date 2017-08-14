@@ -47,8 +47,8 @@
             </div>
             <div class="col-md-4">
                 <h5>Configurations</h5>
-                <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Remove All</button>
-                <button type="button" class="btn btn-primary" onclick="initializePersons()">Initialize</button>
+                <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Hide All</button>
+                <button type="button" class="btn btn-primary" onclick="initializePersons()">Show All</button>
             </div>
         </div>
         <br>
@@ -62,17 +62,17 @@
         </span>
         <span>
             <label class="switch">
-                <input type="checkbox" onchange="toggleStageGrid()" checked>
+                <input type="checkbox" onchange="toggleStageGrid()">
                 <span class="slider round"></span>
         </label>
         Stage Grid
         </span>
         <span>
-            <label class="switch" disabled>
-                <input type="checkbox" onchange="">
+            <label class="switch">
+                <input type="checkbox" onchange="toggleAudienceView()" checked>
                 <span class="slider round"></span>
         </label>
-        Birdseye View
+        Audience View
         </span>
     </div>
 

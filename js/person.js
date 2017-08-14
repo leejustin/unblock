@@ -1,3 +1,5 @@
+var personArray = [];
+
 class Person extends THREE.Mesh {
     constructor(coordHorizontal, coordVertical, alias) {
         var personGeometry = new THREE.SphereGeometry(1, 32, 32);
@@ -24,4 +26,61 @@ function clonePersonArray(personArrayToClone) {
         clonedArray.push(copiedPerson);
     }
     return clonedArray;
+}
+
+/* Redraws the entire board with person objects -- board should be cleared first */
+function initializePersons() {
+    if (formations.length < 1) {
+        formations.push(personArray);
+    }
+    for (person of personArray) {
+        scene.add(person);
+    }
+}
+
+/* Clears the stage of all person objects */
+function removeAllPersons() {
+    objectTransformControl.detach();
+
+    for (person of personArray) {
+        scene.remove(person);
+    }
+}
+
+/* Removes a single person */
+function removePerson(pid) {
+    if (pid != null) {
+        var toRemove = scene.getObjectById(pid);
+
+        //Detach the transform control if it's attached to this Person
+        if (objectTransformControl.position.x == toRemove.position.x &&
+            objectTransformControl.position.y == toRemove.position.y) {
+            objectTransformControl.detach();
+        }
+
+        scene.remove(toRemove);
+        for (var i = 0; i < personArray.length; i++) {
+            if (personArray[i] == toRemove) {
+                personArray.splice(i, 1);
+            }
+        }
+    }
+}
+
+/* Create and add a person to the spawn location */
+function addPerson(alias = "no_alias") {
+    var toAdd = new Person(spawnPersonHorizontal, spawnPersonVertical, alias);
+    personArray.push(toAdd);
+
+    objectTransformControl.attach(toAdd);
+    scene.add(toAdd);
+}
+
+/* Return the id of the person with the object transform */
+function getSelectedPerson() {
+    try {
+        return objectTransformControl.object.id;
+    } catch (e) {
+        return;
+    }
 }

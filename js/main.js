@@ -6,13 +6,22 @@
 /*******************
  * Manage Settings *
  *******************/
-var CAMERA = {
+var CAMERA_STAGE = {
   fov: 45,
   near: window.innerWidth / window.innerHeight,
   far: 1000,
   zoomX: 0,//-0.25,
   zoomY: 20,//27,
   zoomZ: 30,//48,
+};
+
+var CAMERA_BIRD = {
+  fov: 45,
+  near: window.innerWidth / window.innerHeight,
+  far: 1000,
+  zoomX: -2,
+  zoomY: 55,
+  zoomZ: 0,
 };
 
 var CONTROLS = {
@@ -84,8 +93,8 @@ function initializeScene() {
 
   // Camera and set initial view
   var aspectRatio = canvasWidth / canvasHeight;
-  camera = new THREE.PerspectiveCamera(CAMERA.fov, aspectRatio, CAMERA.near, CAMERA.far);
-  camera.position.set(CAMERA.zoomX, CAMERA.zoomY, CAMERA.zoomZ);
+  camera = new THREE.PerspectiveCamera(CAMERA_STAGE.fov, aspectRatio, CAMERA_STAGE.near, CAMERA_STAGE.far);
+  camera.position.set(CAMERA_STAGE.zoomX, CAMERA_STAGE.zoomY, CAMERA_STAGE.zoomZ);
   camera.lookAt(scene.position);
   scene.add(camera);
 
