@@ -54,8 +54,8 @@
         <br>
         <!-- Rounded switch -->
         <span>
-            <label class="switch" disabled>
-                <input type="checkbox">
+            <label class="switch">
+                <input type="checkbox" onchange="toggleStageMesh()" checked>
                 <span class="slider round"></span>
         </label>
         Hardwood Floor
@@ -94,6 +94,7 @@
     <script src="lib/threejs/plugins/OrbitControls.js"></script>
     <script src="lib/threejs/plugins/TransformControls.js"></script>
 
+    <script src="assets/texture/hardwood-smaller.js"></script>
     <script src="js/person.js"></script>
     <script src="js/formation.js"></script>
     <script src="js/stage.js"></script>

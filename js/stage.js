@@ -37,7 +37,12 @@ function initializeStageMaterial() {
     var textureLoader = new THREE.TextureLoader();
     var maxAnisotropy = renderer.getMaxAnisotropy();
 
-    var texture = textureLoader.load("assets/texture/hardwood-smaller.jpg");
+    //var texture = textureLoader.load("assets/texture/hardwood-smaller.jpg");
+    var texture = new THREE.Texture();
+    texture.image = hardwood_smaller_image;
+    hardwood_smaller_image.onload = function() {
+	    texture.needsUpdate = true;
+    };
     var material = new THREE.MeshBasicMaterial({ map: texture });
 
     texture.anisotropy = maxAnisotropy;
@@ -49,7 +54,18 @@ function initializeStageMaterial() {
     stageMesh = new THREE.Mesh(geometry, material);
     stageMesh.rotation.x = - Math.PI / 2;
     //mesh1.scale.set( 2, 2, 2 );
+    stageMeshIsVisible = true;
     scene.add(stageMesh);
+}
+
+function toggleStageMesh() {
+    if (stageMeshIsVisible) {
+        stageMeshIsVisible = false;
+        scene.remove(stageMesh);
+    } else {
+        stageMeshIsVisible = true;
+        scene.add(stageMesh);
+    }
 }
 
 /* Redraws the entire board with person objects -- board should be cleared first */
