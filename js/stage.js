@@ -9,7 +9,7 @@ var stageMesh;
 var gridHelperIsVisible;
 var stageMeshIsVisible;
 
-var isAudienceView = true;
+var isAudienceView = false;
 
 //Coordinates where a person will spawn
 let spawnPersonHorizontal = -12;

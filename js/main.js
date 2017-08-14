@@ -10,9 +10,9 @@ var CAMERA_STAGE = {
   fov: 45,
   near: window.innerWidth / window.innerHeight,
   far: 1000,
-  zoomX: 0,//-0.25,
-  zoomY: 40,//27,
-  zoomZ: 40,//48,
+  zoomX: 0.007,//-0.25,
+  zoomY: 5.3,//27,
+  zoomZ: 30.06,//48,
 };
 
 var CAMERA_BIRD = {
@@ -20,8 +20,8 @@ var CAMERA_BIRD = {
   near: window.innerWidth / window.innerHeight,
   far: 1000,
   zoomX: 0,
-  zoomY: 55,
-  zoomZ: 0,
+  zoomY: 40,
+  zoomZ: 40,
 };
 
 var CONTROLS = {
@@ -93,8 +93,8 @@ function initializeScene() {
 
   // Camera and set initial view
   var aspectRatio = canvasWidth / canvasHeight;
-  camera = new THREE.PerspectiveCamera(CAMERA_STAGE.fov, aspectRatio, CAMERA_STAGE.near, CAMERA_STAGE.far);
-  camera.position.set(CAMERA_STAGE.zoomX, CAMERA_STAGE.zoomY, CAMERA_STAGE.zoomZ);
+  camera = new THREE.PerspectiveCamera(CAMERA_BIRD.fov, aspectRatio, CAMERA_BIRD.near, CAMERA_BIRD.far);
+  camera.position.set(CAMERA_BIRD.zoomX, CAMERA_BIRD.zoomY, CAMERA_BIRD.zoomZ);
   camera.lookAt(scene.position);
   scene.add(camera);
 
