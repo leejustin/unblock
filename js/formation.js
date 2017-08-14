@@ -1,4 +1,5 @@
 var formations = [];
+var activeFormation = 0;
 
 /* Set the current formation to a new or existing one.  Return the index of the newly-created formation */
 function createAndSetFormation(formationIndex = null) {
@@ -8,12 +9,15 @@ function createAndSetFormation(formationIndex = null) {
         personArrayToUse = clonePersonArray(formations[formationIndex]);
         //console.log(personArrayToUse);
     } else {
-        personArrayToUse = new Array();
+        //personArrayToUse = new Array();
+        personArrayToUse = clonePersonArray(formations[activeFormation]);
     }
 
     formations.push(personArrayToUse);
     var createdFormationIndex = formations.length - 1;
     console.log("Created formation at index: " + createdFormationIndex);
+
+    activeFormation = createdFormationIndex;
 
     addOptionToSelectList(createdFormationIndex);
     setFormation(createdFormationIndex);
@@ -22,7 +26,10 @@ function createAndSetFormation(formationIndex = null) {
 
 function setFormation(formationIndex) {
     removeAllPersons();
+
     personArray = formations[formationIndex];
+    activeFormation = formationIndex * 1;
+
     changeFormationSelectList(formationIndex);
     initializePersons();
 }

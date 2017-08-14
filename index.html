@@ -32,16 +32,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <button type="button" class="btn btn-primary" onclick="addPerson()">Add Person</button>
-                <button type="button" class="btn btn-primary" onclick="removePerson(getSelectedPerson())">Remove Selected</button>
+                <h5>Person</h5>
+                <button type="button" class="btn btn-primary" onclick="addPerson()">Add</button>
+                <button type="button" class="btn btn-primary" onclick="removePerson(getSelectedPerson())">Remove</button>
+                <button type="button" class="btn btn-primary" onclick="" disabled>Remove All</button>
             </div>
             <div class="col-md-4">
-                <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add Formation</button>
+                <h5>Formation</h5>
+                <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add</button>
+                <button type="button" class="btn btn-primary" onclick="" disabled>Remove</button>
                 <select id="formation-list" class="selectpicker" data-width="fit">
                     <option value="0">Formation 1</option>
                 </select>
             </div>
             <div class="col-md-4">
+                <h5>Configurations</h5>
                 <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Remove All</button>
                 <button type="button" class="btn btn-primary" onclick="initializePersons()">Initialize</button>
             </div>
@@ -64,7 +69,7 @@
         </span>
         <span>
             <label class="switch" disabled>
-                <input type="checkbox" onchange="" checked>
+                <input type="checkbox" onchange="">
                 <span class="slider round"></span>
         </label>
         Birdseye View
