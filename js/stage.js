@@ -2,7 +2,6 @@
  * A stage is conceptually the 2D plane where objects 
  * (such as persons) are placed. 
  */
-var formations = [];    //use formations to hold a personArray
 var personArray = [];
 
 var gridHelper;
@@ -109,47 +108,3 @@ function getSelectedPerson() {
         return;
     }
 }
-
-/* Set the current formation to a new or existing one.  Return the index of the newly-created formation */
-function createAndSetFormation(formationIndex = null) {
-    var personArrayToUse;
-
-    if (formationIndex != null && formationIndex < formations.length) {
-        personArrayToUse = clonePersonArray(formations[formationIndex]);
-        //console.log(personArrayToUse);
-    } else {
-        personArrayToUse = new Array();
-    }
-
-    formations.push(personArrayToUse);
-    var createdFormationIndex = formations.length - 1;
-    console.log("Created formation at index: " + createdFormationIndex);
-
-    setFormation(createdFormationIndex);
-    return createdFormationIndex;
-}
-
-function setFormation(formationIndex) {
-    removeAllPersons();
-    personArray = formations[formationIndex];
-    initializePersons();
-}
-/*
-document.getElementById("formation-dropdown").onchange = function() {
-    console.log("DO");
-   var sheet=document.getElementById("formation-dropdown").value;
-
-   if(sheet=="one"){
-   setActiveStyleSheet("theme1");
-   }
-   else if(sheet=="two"){
-   setActiveStyleSheet("theme2");
-   }
-   else if(sheet=="three"){
-   setActiveStyleSheet("theme3");
-   }
-   else{
-   setActiveStyleSheet("default");
-   }
-   return false
-};*/

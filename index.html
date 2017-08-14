@@ -36,23 +36,9 @@
             </div>
             <div class="col-md-4">
                 <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add Formation</button>
-                <!--
-                <span class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="formation-dropdown">Change Formation
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li value="0"><a href="#">Form 1</a></li>
-                        <li value="1"><a href="#">Form 2</a></li>
-                        <li value="2"><a href="#">Form 3</a></li>
-                    </ul>
-                </span>
-                -->
-                <span>
-                <select>
-                    <option>1</option>
-                    <option>2</option>
+                <select id="formation-list" class="selectpicker" data-width="fit">
+                    <option value="0">Formation 1</option>
                 </select>
-                </span>
             </div>
             <div class="col-md-4">            
                 <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Remove All</button>
@@ -79,9 +65,15 @@
     
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="lib/bootstrap.min.js"></script>
+
+    <!-- Boostrap Select -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
     <!-- Three.js -->
     <script src="lib/threejs/dat.gui.min.js"></script>
@@ -90,6 +82,7 @@
     <script src="lib/threejs/plugins/TransformControls.js"></script>
 
     <script src="js/person.js"></script>
+    <script src="js/formation.js"></script>
     <script src="js/stage.js"></script>
     <script src="js/main.js"></script>
 </body>
