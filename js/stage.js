@@ -69,6 +69,12 @@ function toggleStageMesh() {
     stageMeshIsVisible = !stageMeshIsVisible;
 }
 
+/* This will toggle both meshes. It's up to your implementation to keep track of the states */
+function toggleStageMeshAndGrid() {
+    toggleStageMesh();
+    toggleStageGrid();
+}
+
 function toggleAudienceView() {
     var CAMERA;
     if (isAudienceView) {

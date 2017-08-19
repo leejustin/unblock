@@ -39,6 +39,8 @@ var RENDERER = {
 
 let GRID_UNITS = 1;
 
+let HEIGHT_PADDING = 0.75;
+
 /********************
  * Global Variables *
  ********************/
@@ -66,9 +68,9 @@ function animateScene() {
 }
 
 function resizeWindow() {
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = window.innerWidth / (window.innerHeight * HEIGHT_PADDING);
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, (window.innerHeight * HEIGHT_PADDING));
 }
 
 function addToDOM(object) {
@@ -87,7 +89,7 @@ function initializeScene() {
   // Scene and window resize listener
   scene = new THREE.Scene();
   var canvasWidth = window.innerWidth;
-  var canvasHeight = window.innerHeight * 0.8;
+  var canvasHeight = window.innerHeight * HEIGHT_PADDING;
   window.addEventListener('resize', resizeWindow, false);
 
 
