@@ -68,9 +68,11 @@ function animateScene() {
 }
 
 function resizeWindow() {
-  camera.aspect = window.innerWidth / (window.innerHeight * HEIGHT_PADDING);
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, (window.innerHeight * HEIGHT_PADDING));
+  if (!isMobileDevice) {
+    camera.aspect = window.innerWidth / (window.innerHeight * HEIGHT_PADDING);
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, (window.innerHeight * HEIGHT_PADDING));
+  }
 }
 
 function addToDOM(object) {
