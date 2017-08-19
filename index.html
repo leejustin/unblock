@@ -55,17 +55,10 @@
         <!-- Rounded switch -->
         <span>
             <label class="switch">
-                <input type="checkbox" onchange="toggleStageMesh()" checked>
+                <input type="checkbox" onchange="toggleStageMeshAndGrid()">
                 <span class="slider round"></span>
         </label>
-        Hardwood Floor
-        </span>
-        <span>
-            <label class="switch">
-                <input type="checkbox" onchange="toggleStageGrid()">
-                <span class="slider round"></span>
-        </label>
-        Stage Grid
+        Grid View
         </span>
         <span>
             <label class="switch">
@@ -94,7 +87,9 @@
     <script src="lib/threejs/plugins/OrbitControls.js"></script>
     <script src="lib/threejs/plugins/TransformControls.js"></script>
 
+    <!-- Projecet js -->
     <script src="assets/texture/hardwood-smaller.js"></script>
+    <script src="js/helper.js"></script>
     <script src="js/person.js"></script>
     <script src="js/formation.js"></script>
     <script src="js/stage.js"></script>
