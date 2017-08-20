@@ -34,7 +34,7 @@
             <div class="col-md-4">
                 <header>
                     <h5>Person</h5>
-                    <span class="glyphicon glyphicon-info-sign"></span>
+                    <span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#personHeaderModal"></span>
                 </header>
                 <button type="button" class="btn btn-primary" onclick="addPerson()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="removePerson(getSelectedPerson())">Remove</button>
@@ -43,15 +43,15 @@
             <div class="col-md-4">
                 <header>
                     <h5>Formation</h5>
-                    <span class="glyphicon glyphicon-info-sign"></span>
+                    <span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#formationHeaderModal"></span>
                 </header>
                 <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="" disabled>Remove</button>
             </div>
             <div class="col-md-4">
                 <header>
-                    <h5>Select</h5>
-                    <span class="glyphicon glyphicon-info-sign"></span>
+                    <h5>Selection</h5>
+                    <span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#selectionHeaderModal"></span>
                 </header>
                 <select id="formation-list" class="selectpicker" data-width="fit">
                     <option value="0">Formation 1</option>
@@ -75,6 +75,63 @@
         Audience View
         </span>
     </div>
+
+    <!-- Modal content -->
+    <div id="personHeaderModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Person</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Represented as a sphere on the stage. You can click a person and drag it around for placement.</p>
+                        <ol><b>Add</b> - Adds a new person into the current formation.</ol>
+                        <ol><b>Remove</b> - Removes the selected person from the current formation.</ol>
+                        <ol><b>Remove All</b> - Removes all persons from the current formation.</ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="formationHeaderModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Formation</h4>
+                </div>
+                <div class="modal-body">
+                        <p>Represents a set of persons and their positions on the stage.</p>
+                            <ol><b>Add</b> - Adds a formation using the same positions as the currently-selected formation.</ol>
+                            <ol><b>Remove</b> - Removes the selected formation.</ol>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="selectionHeaderModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Selection</h4>
+                </div>
+                <div class="modal-body">
+                        <ol><b>Formation</b> - Change the currently-selected formation.</ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End modal content -->
+
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
