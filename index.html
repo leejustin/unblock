@@ -38,7 +38,7 @@
                 </header>
                 <button type="button" class="btn btn-primary" onclick="addPerson()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="removePerson(getSelectedPerson())">Remove</button>
-                <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Remove All</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#removeAllPersonsActionModal">Remove All</button>
             </div>
             <div class="col-md-4">
                 <header>
@@ -126,6 +126,19 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="removeAllPersonsActionModal" class="modal fade modal-action" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Are you sure you want to delete all persons from the current formation?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeAllPersons()">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                 </div>
             </div>
         </div>
