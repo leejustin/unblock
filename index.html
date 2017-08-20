@@ -35,20 +35,18 @@
                 <h5>Person</h5>
                 <button type="button" class="btn btn-primary" onclick="addPerson()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="removePerson(getSelectedPerson())">Remove</button>
-                <button type="button" class="btn btn-primary" onclick="" disabled>Remove All</button>
+                <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Remove All</button>
             </div>
             <div class="col-md-4">
                 <h5>Formation</h5>
                 <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="" disabled>Remove</button>
+            </div>
+            <div class="col-md-4">
+                <h5>Select</h5>
                 <select id="formation-list" class="selectpicker" data-width="fit">
                     <option value="0">Formation 1</option>
                 </select>
-            </div>
-            <div class="col-md-4">
-                <h5>Configurations</h5>
-                <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Hide All</button>
-                <button type="button" class="btn btn-primary" onclick="initializePersons()">Show All</button>
             </div>
         </div>
         <br>
@@ -73,6 +71,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- jQuery toastr library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Bootstrap Core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

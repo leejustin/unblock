@@ -21,11 +21,15 @@ function createAndSetFormation(formationIndex = null) {
 
     addOptionToSelectList(createdFormationIndex);
     setFormation(createdFormationIndex);
+
+    toastFormationCreated();
+
     return createdFormationIndex;
 }
 
 function setFormation(formationIndex) {
-    removeAllPersons();
+    toastClearAll();
+    hideAllPersons();
 
     personArray = formations[formationIndex];
     activeFormation = formationIndex * 1;
