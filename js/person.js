@@ -81,6 +81,7 @@ function addPerson(alias = "no_alias") {
 
     objectTransformControl.attach(toAdd);
     scene.add(toAdd);
+    toastClearAll();
     toastPersonCreated(String(personArray.length));
 }
 
