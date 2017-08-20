@@ -24,8 +24,12 @@ canvas {
 /************************************************
 * Header Info Icon
 *************************************************/
-header > h5 { display: inline-block; }
+header > h4 { display: inline-block; }
 header span { padding: 3px; }
+
+.clickable {
+  cursor: pointer;
+}
 
 /************************************************
 * Switch Button
