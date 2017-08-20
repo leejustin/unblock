@@ -38,12 +38,19 @@ function initializePersons() {
     }
 }
 
-/* Clears the stage of all person objects */
-function removeAllPersons() {
+/* Hides the stage of all person objects */
+function hideAllPersons() {
     objectTransformControl.detach();
 
     for (person of personArray) {
         scene.remove(person);
+    }
+}
+
+/* Removes every person from the entire stage */
+function removeAllPersons() {
+    for (i = personArray.length-1; i >= 0; i--) {
+        removePerson(personArray[i].id);
     }
 }
 
@@ -74,6 +81,7 @@ function addPerson(alias = "no_alias") {
 
     objectTransformControl.attach(toAdd);
     scene.add(toAdd);
+    toastPersonCreated(String(personArray.length));
 }
 
 /* Return the id of the person with the object transform */
