@@ -163,8 +163,15 @@ function transformPerson() {
 function onDocumentMouseDown(event) {
   //event.preventDefault();
   var rect = renderer.domElement.getBoundingClientRect();
-  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-  mouse.y = - ((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+  if (isMobileDevice()) {
+    mouse.x = +(event.targetTouches[0].pageX / window.innerwidth) * 2 +-1;
+    mouse.y = -(event.targetTouches[0].pageY / window.innerHeight) * 2 + 1;
+  } else {
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = - ((event.clientY - rect.top) / rect.height) * 2 + 1;
+  }
+  
   raycaster.setFromCamera(mouse, camera);
 
   var intersects = raycaster.intersectObjects(personArray);
