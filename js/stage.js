@@ -41,8 +41,8 @@ function initializeStageMaterial() {
     //var texture = textureLoader.load("assets/texture/hardwood-smaller.jpg");
     var texture = new THREE.Texture();
     texture.image = hardwood_smaller_image;
-    hardwood_smaller_image.onload = function() {
-	    texture.needsUpdate = true;
+    hardwood_smaller_image.onload = function () {
+        texture.needsUpdate = true;
     };
     var material = new THREE.MeshBasicMaterial({ map: texture });
 

@@ -49,7 +49,7 @@ function hideAllPersons() {
 
 /* Removes every person from the entire stage */
 function removeAllPersons() {
-    for (i = personArray.length-1; i >= 0; i--) {
+    for (i = personArray.length - 1; i >= 0; i--) {
         removePerson(personArray[i].id);
     }
 }
