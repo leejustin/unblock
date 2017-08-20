@@ -32,18 +32,27 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h5>Person</h5>
+                <header>
+                    <h5>Person</h5>
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </header>
                 <button type="button" class="btn btn-primary" onclick="addPerson()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="removePerson(getSelectedPerson())">Remove</button>
                 <button type="button" class="btn btn-primary" onclick="removeAllPersons()">Remove All</button>
             </div>
             <div class="col-md-4">
-                <h5>Formation</h5>
+                <header>
+                    <h5>Formation</h5>
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </header>
                 <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="" disabled>Remove</button>
             </div>
             <div class="col-md-4">
-                <h5>Select</h5>
+                <header>
+                    <h5>Select</h5>
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </header>
                 <select id="formation-list" class="selectpicker" data-width="fit">
                     <option value="0">Formation 1</option>
                 </select>

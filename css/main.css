@@ -21,6 +21,15 @@ canvas {
   height: 50vh;
 }
 
+/************************************************
+* Header Info Icon
+*************************************************/
+header > h5 { display: inline-block; }
+header span { padding: 3px; }
+
+/************************************************
+* Switch Button
+*************************************************/
 /* The switch - the box around the slider */
 .switch {
   position: relative;
