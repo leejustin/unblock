@@ -68,7 +68,7 @@ function animateScene() {
 }
 
 function resizeWindow() {
-  if (!isMobileDevice) {
+  if (!isMobileDevice()) {
     camera.aspect = window.innerWidth / (window.innerHeight * HEIGHT_PADDING);
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, (window.innerHeight * HEIGHT_PADDING));
