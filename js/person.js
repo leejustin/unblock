@@ -2,12 +2,12 @@ var personArray = [];
 
 class Person extends THREE.Mesh {
     constructor(coordHorizontal, coordVertical, alias) {
-        var personGeometry = new THREE.SphereGeometry(1, 32, 32);
+        var personGeometry = new THREE.SphereGeometry((1 * SCALE_FACTOR), 32, 32);
         var personMaterial = new THREE.MeshBasicMaterial({ color: 0x42a4f4 });
 
         super(personGeometry, personMaterial);
         this.alias = alias;
-        this.position.set(coordHorizontal, 1, coordVertical);
+        this.position.set((coordHorizontal * SCALE_FACTOR), (1 * SCALE_FACTOR), (coordVertical * SCALE_FACTOR));
     }
 }
 

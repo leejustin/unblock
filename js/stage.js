@@ -11,14 +11,16 @@ var stageMeshIsVisible;
 
 var isAudienceView = false;
 
+let SCALE_FACTOR = 8;
+
 //Coordinates where a person will spawn
 let spawnPersonHorizontal = -12;
 let spawnPersonVertical = -12;
 
-let stageSize = 40;
+let stageSize = 40 * SCALE_FACTOR;
 
 function initializeStageGrid() {
-    gridHelper = new THREE.GridHelper(stageSize, stageSize / 2);
+    gridHelper = new THREE.GridHelper(stageSize, stageSize / (2 * SCALE_FACTOR));
     //gridHelper.position.y = 1;
     gridHelperIsVisible = false;
     //scene.add(gridHelper);
