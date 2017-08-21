@@ -151,6 +151,7 @@ function initializeScene() {
 function transformPerson() {
   var horizontal = objectTransformControl.position.x;
   var vertical = objectTransformControl.position.z;
+
   var pid = objectTransformControl.object.id;
   console.log("pid of transformed person: " + pid);
 
@@ -162,6 +163,7 @@ function transformPerson() {
 
 function onDocumentMouseDown(event) {
   //event.preventDefault();
+  console.log("EEYEYY");
   var rect = renderer.domElement.getBoundingClientRect();
 
   if (isMobileDevice()) {
@@ -171,14 +173,13 @@ function onDocumentMouseDown(event) {
     mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = - ((event.clientY - rect.top) / rect.height) * 2 + 1;
   }
-  
   raycaster.setFromCamera(mouse, camera);
 
   var intersects = raycaster.intersectObjects(personArray);
 
   //Object was clicked
   if (intersects.length > 0) {
-    console.log("Object " + intersects[0].object.name + " was clicked");
+    console.log("Object " + intersects[0].object.alias + " was clicked");
     objectTransformControl.attach(intersects[0].object);
   }
 }
