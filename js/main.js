@@ -112,7 +112,11 @@ function initializeScene() {
    **********************/
 
   // OrbitControls using mouse
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  if (isMobileDevice()) {
+    controls = new THREE.TrackballControls(camera, renderer.domElement);   
+  } else {
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+  }
   for (var key in CONTROLS) { controls[key] = CONTROLS[key]; }
   controls.addEventListener('change', renderScene);
   var ambientLight = new THREE.AmbientLight(Math.random() * 0x202020);
@@ -163,7 +167,6 @@ function transformPerson() {
 
 function onDocumentMouseDown(event) {
   //event.preventDefault();
-  console.log("EEYEYY");
   var rect = renderer.domElement.getBoundingClientRect();
 
   if (isMobileDevice()) {
