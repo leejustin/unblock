@@ -59,21 +59,33 @@
             </div>
         </div>
         <br>
-        <!-- Rounded switch -->
-        <span class="switch-col">
-            <label class="switch" >
-                <input type="checkbox" onchange="toggleStageMeshAndGrid()">
-                <span class="slider round"></span>
-        </label>
-        <span>Grid View</span>
-        </span>
-        <span class="switch-col">
-            <label class="switch">
-                <input type="checkbox" onchange="toggleAudienceView()">
-                <span class="slider round"></span>
-        </label>
-        <span>Audience View</span>
-        </span>
+        <div class="row">
+            <!-- Rounded switch -->
+            <div class="col-md-6">
+                <span class="switch-col">
+                    <label class="switch" >
+                        <input type="checkbox" onchange="toggleStageMeshAndGrid()">
+                        <span class="slider round"></span>
+                </label>
+                <span>Grid View</span>
+                </span>
+                <span class="switch-col">
+                    <label class="switch">
+                        <input type="checkbox" onchange="toggleAudienceView()">
+                        <span class="slider round"></span>
+                </label>
+                <span>Audience View</span>
+                </span>
+            </div>
+            <!-- Settings -->
+            <!--
+            <div class="col-md-6">
+                <span>
+                    <button type="button" class="btn btn-primary disabled">Save</button>
+                </span>
+            </div>
+            -->
+        </div>
     </div>
 
     <!-- Modal content -->

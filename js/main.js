@@ -197,8 +197,8 @@ function onDocumentMouseDown(event) {
 /******* DUMP OF TEMPORARY TESTING STUFF ********/
 function testInitPersons() {
   personArray.push(new Person(0, 0, "name1"));
-  personArray.push(new Person(4, 3, "name2"));
-  personArray.push(new Person(-3, -6, "name3"));
+  personArray.push(new Person(4 * SCALE_FACTOR, 3 * SCALE_FACTOR, "name2"));
+  personArray.push(new Person(-3 * SCALE_FACTOR, -6 * SCALE_FACTOR, "name3"));
 }
 
 /******** END TESTING STUFF *************** */

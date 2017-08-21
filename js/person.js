@@ -7,7 +7,7 @@ class Person extends THREE.Mesh {
 
         super(personGeometry, personMaterial);
         this.alias = alias;
-        this.position.set((coordHorizontal * SCALE_FACTOR), (1 * SCALE_FACTOR), (coordVertical * SCALE_FACTOR));
+        this.position.set(coordHorizontal, (1 * SCALE_FACTOR), coordVertical);
     }
 }
 
