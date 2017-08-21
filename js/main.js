@@ -24,13 +24,19 @@ var CAMERA_BIRD = {
   zoomZ: 40,
 };
 
-var CONTROLS = {
+var ORBIT_CONTROLS = {
   enabled: true,
   userPan: true,
   userPanSpeed: 1,
   minDistance: 10.0,
   maxDistance: 200.0,
   maxPolarAngle: (Math.PI / 180) * 80,
+};
+
+var TRACKBALL_CONTROLS = {
+  noPan: true,
+  rotateSpeed: 0.5,
+  maxPolarAngle: (Math.PI)
 };
 
 var RENDERER = {
@@ -113,11 +119,12 @@ function initializeScene() {
 
   // OrbitControls using mouse
   if (isMobileDevice()) {
-    controls = new THREE.TrackballControls(camera, renderer.domElement);   
+    controls = new THREE.TrackballControls(camera, renderer.domElement);
+    for (var key in TRACKBALL_CONTROLS) { controls[key] = TRACKBALL_CONTROLS[key]; }
   } else {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
+    for (var key in ORBIT_CONTROLS) { controls[key] = ORBIT_CONTROLS[key]; }
   }
-  for (var key in CONTROLS) { controls[key] = CONTROLS[key]; }
   controls.addEventListener('change', renderScene);
   var ambientLight = new THREE.AmbientLight(Math.random() * 0x202020);
   scene.add(ambientLight);
