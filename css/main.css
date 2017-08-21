@@ -49,6 +49,11 @@ header span { padding: 3px; }
   display: inline-block;
   width: 60px;
   height: 34px;
+  vertical-align: middle
+}
+
+.switch-col {
+  padding-right: 10px;
 }
 
 /* Hide default HTML checkbox */
