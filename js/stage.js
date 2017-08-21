@@ -35,28 +35,35 @@ function toggleStageGrid() {
 }
 
 function initializeStageMaterial() {
-    var textureLoader = new THREE.TextureLoader();
     var maxAnisotropy = renderer.getMaxAnisotropy();
 
-    //var texture = textureLoader.load("assets/texture/hardwood-smaller.jpg");
-    var texture = new THREE.Texture();
-    texture.image = hardwood_smaller_image;
-    hardwood_smaller_image.onload = function () {
-        texture.needsUpdate = true;
-    };
-    var material = new THREE.MeshBasicMaterial({ map: texture });
+    var loader = new THREE.TextureLoader();
+    loader.crossOrigin = "res.cloudinary.com";
 
-    texture.anisotropy = maxAnisotropy;
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(1, 40); //Creates the floorboard design
+    loader.load(
+        'http://res.cloudinary.com/dxxrfg2kn/image/upload/v1503283060/hardwood-smaller_mwa2il.jpg',
+        function (texture) {
+            var material = new THREE.MeshBasicMaterial({ map: texture });
 
-    var geometry = new THREE.PlaneGeometry(stageSize, stageSize);
+            texture.anisotropy = maxAnisotropy;
+            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(1, 40); //Creates the floorboard design
 
-    stageMesh = new THREE.Mesh(geometry, material);
-    stageMesh.rotation.x = - Math.PI / 2;
-    //mesh1.scale.set( 2, 2, 2 );
-    stageMeshIsVisible = true;
-    scene.add(stageMesh);
+            var geometry = new THREE.PlaneGeometry(stageSize, stageSize);
+
+            stageMesh = new THREE.Mesh(geometry, material);
+            stageMesh.rotation.x = - Math.PI / 2;
+            //mesh1.scale.set( 2, 2, 2 );
+            stageMeshIsVisible = true;
+            scene.add(stageMesh);
+        },
+        function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        },
+        function (xhr) {
+            console.log('An error happened');
+        }
+    );
 }
 
 function toggleStageMesh() {
