@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Unblock</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="app/main.css">
+
+</head>
+
+<body>
+    <!-- Page Content -->
+    <div id="canvas-body"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <header>
+                    <h4>Person</h4>
+                    <span class="glyphicon glyphicon-info-sign clickable" data-toggle="modal" data-target="#personHeaderModal"></span>
+                </header>
+                <button type="button" class="btn btn-primary" onclick="addPerson()">Add</button>
+                <button type="button" class="btn btn-primary" onclick="removePerson(getSelectedPerson())">Remove</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#removeAllPersonsActionModal">Remove All</button>
+            </div>
+            <div class="col-md-4">
+                <header>
+                    <h4>Formation</h4>
+                    <span class="glyphicon glyphicon-info-sign clickable" data-toggle="modal" data-target="#formationHeaderModal"></span>
+                </header>
+                <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add</button>
+                <button type="button" class="btn btn-primary" onclick="" disabled>Remove</button>
+            </div>
+            <div class="col-md-4">
+                <header>
+                    <h4>Selection</h4>
+                    <span class="glyphicon glyphicon-info-sign clickable" data-toggle="modal" data-target="#selectionHeaderModal"></span>
+                </header>
+                <select id="formation-list" class="selectpicker" data-width="fit">
+                    <option value="0">Formation 1</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <!-- Rounded switch -->
+            <div class="col-md-6">
+                <span class="switch-col">
+                    <label class="switch" >
+                        <input type="checkbox" onchange="toggleStageMeshAndGrid()">
+                        <span class="slider round"></span>
+                </label>
+                <span>Grid View</span>
+                </span>
+                <span class="switch-col">
+                    <label class="switch">
+                        <input type="checkbox" onchange="toggleAudienceView()">
+                        <span class="slider round"></span>
+                </label>
+                <span>Audience View</span>
+                </span>
+            </div>
+            <!-- Settings -->
+            <!--
+            <div class="col-md-6">
+                <span>
+                    <button type="button" class="btn btn-primary disabled">Save</button>
+                </span>
+            </div>
+            -->
+        </div>
+    </div>
+
+    <!-- Modal content -->
+    <div id="personHeaderModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Person</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Represented as a sphere on the stage. You can click a person and drag it around for placement.</p>
+                    <ol><b>Add</b> - Adds a new person into the current formation.</ol>
+                    <ol><b>Remove</b> - Removes the selected person from the current formation.</ol>
+                    <ol><b>Remove All</b> - Removes all persons from the current formation.</ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="formationHeaderModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Formation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Represents a set of persons and their positions on the stage.</p>
+                    <ol><b>Add</b> - Adds a formation using the same positions as the currently-selected formation.</ol>
+                    <ol><b>Remove</b> - Removes the selected formation.</ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="selectionHeaderModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Selection</h4>
+                </div>
+                <div class="modal-body">
+                    <ol><b>Formation</b> - Change the currently-selected formation.</ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="removeAllPersonsActionModal" class="modal fade modal-action" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Are you sure you want to delete all persons from the current formation?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeAllPersons()">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End modal content -->
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- jQuery toastr library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Boostrap Select -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+    <!-- Three.js -->
+    <script src="lib/threejs/dat.gui.min.js"></script>
+    <script src="lib/threejs/three.min.js"></script>
+    <script src="lib/threejs/plugins/TrackballControls.js"></script>
+    <script src="lib/threejs/plugins/OrbitControls.js"></script>
+    <script src="lib/threejs/plugins/TransformControls.js"></script>
+
+    <!-- Projecet js -->
+    <script src="js/helper.js"></script>
+    <script src="js/person.js"></script>
+    <script src="js/formation.js"></script>
+    <script src="js/stage.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
