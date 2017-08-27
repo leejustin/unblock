@@ -17,7 +17,7 @@ let SCALE_FACTOR = 8;
 let spawnPersonHorizontal = -12 * SCALE_FACTOR;
 let spawnPersonVertical = -12 * SCALE_FACTOR;
 
-let stageSize = 40 * SCALE_FACTOR;
+let stageSize = 80 * SCALE_FACTOR;
 
 function initializeStageGrid() {
     gridHelper = new THREE.GridHelper(stageSize, stageSize / (2 * SCALE_FACTOR));
@@ -49,7 +49,7 @@ function initializeStageMaterial() {
 
             texture.anisotropy = maxAnisotropy;
             texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-            texture.repeat.set(1, 40); //Creates the floorboard design
+            texture.repeat.set(1, stageSize/SCALE_FACTOR); //Creates the floorboard design
 
             var geometry = new THREE.PlaneGeometry(stageSize, stageSize);
 

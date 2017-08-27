@@ -2,14 +2,13 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Unblock</title>
+    <title>BlockThis</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -17,13 +16,61 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/main.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script>
 
+    <!-- Initialize Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyDx60olv62NlQKn5XONx7HQbR4_Y1DHuA0",
+            authDomain: "blockthis-178103.firebaseapp.com",
+            databaseURL: "https://blockthis-178103.firebaseio.com",
+            projectId: "blockthis-178103",
+            storageBucket: "blockthis-178103.appspot.com",
+            messagingSenderId: "109334240835"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <!-- Firebase Auth UI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
+
+    <script type="text/javascript">
+        // FirebaseUI config.
+        var uiConfig = {
+            signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            ],
+            tosUrl: '',
+            signInFlow: 'popup',
+            callbacks: {
+                signInSuccess: function (currentUser, credential, redirectUrl) {
+                    $('#signInModal').modal('hide');
+                    toastSignedIn();
+                    return false;
+                },
+                uiShown: function () {
+                }
+            }
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/2.3.0/firebase-ui-auth__en.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/2.3.0/firebase-ui-auth.css" />
 </head>
 
 <body>
@@ -78,13 +125,19 @@
                 </span>
             </div>
             <!-- Settings -->
-            <!--
             <div class="col-md-6">
-                <span>
-                    <button type="button" class="btn btn-primary disabled">Save</button>
+                <span class="pull-right">
+                    <span class="setting-col">
+                        <button type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Log In</button>
+                    </span>
+                    <span class="setting-col">
+                        <button type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Save</button>
+                    </span>
+                    <span class="setting-col">
+                        <button type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Share</button>
+                    </span>
                 </span>
             </div>
-            -->
         </div>
     </div>
 
@@ -142,7 +195,7 @@
             </div>
         </div>
     </div>
-    <div id="removeAllPersonsActionModal" class="modal fade modal-action" role="dialog">
+    <div id="removeAllPersonsActionModal" class="modal fade modal-action" role="alert">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -155,59 +208,20 @@
             </div>
         </div>
     </div>
+    <div id="signInModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="firebaseui-auth-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- End modal content -->
-
-    <!-- Firebase Libraries -->
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script>
-    
-    <!-- Initialize Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-    <script>
-      var config = {
-        apiKey: "AIzaSyDx60olv62NlQKn5XONx7HQbR4_Y1DHuA0",
-        authDomain: "blockthis-178103.firebaseapp.com",
-        databaseURL: "https://blockthis-178103.firebaseio.com",
-        projectId: "blockthis-178103",
-        storageBucket: "blockthis-178103.appspot.com",
-        messagingSenderId: "109334240835"
-      };
-      firebase.initializeApp(config);
-    </script>
-    
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
-    <script type="text/javascript">
-      // FirebaseUI config.
-      var uiConfig = {
-        signInSuccessUrl: '<url-to-redirect-to-on-success>',
-        signInOptions: [
-          // Leave the lines as is for the providers you want to offer your users.
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-          firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-          firebase.auth.GithubAuthProvider.PROVIDER_ID,
-          firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          firebase.auth.PhoneAuthProvider.PROVIDER_ID
-        ],
-        // Terms of service url.
-        tosUrl: '<your-tos-url>'
-      };
-
-      // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      // The start method will wait until the DOM is loaded.
-      ui.start('#firebaseui-auth-container', uiConfig);
-    </script>
-    <div id="firebaseui-auth-container"></div>
-
-
-
-    <script src="https://www.gstatic.com/firebasejs/ui/2.3.0/firebase-ui-auth__en.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/2.3.0/firebase-ui-auth.css" />
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

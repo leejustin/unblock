@@ -15,6 +15,13 @@ function toastClearAll() {
     toastr.remove();
 }
 
+function toastSignedIn() {
+    var username = firebase.auth().currentUser.displayName;
+    if (username != null && username != "") {
+        toastr.success("Hello, " + username + "!");
+    }
+    toastr.success("You are now signed in!");
+}
 
 /* Convert to JSON for DB */
 function createPersonDto(alias, x, y, z) {
