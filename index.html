@@ -157,6 +157,26 @@
     </div>
     <!-- End modal content -->
 
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script>
+    
+    <!-- Initialize Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyDx60olv62NlQKn5XONx7HQbR4_Y1DHuA0",
+        authDomain: "blockthis-178103.firebaseapp.com",
+        databaseURL: "https://blockthis-178103.firebaseio.com",
+        projectId: "blockthis-178103",
+        storageBucket: "blockthis-178103.appspot.com",
+        messagingSenderId: "109334240835"
+      };
+      firebase.initializeApp(config);
+    </script>
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -183,6 +203,7 @@
 
     <!-- Projecet js -->
     <script src="js/helper.js"></script>
+    <script src="js/remote.js"></script>
     <script src="js/person.js"></script>
     <script src="js/formation.js"></script>
     <script src="js/stage.js"></script>

@@ -30,15 +30,16 @@ function createPersonDto(alias, x, y, z) {
     }
 }
 
-function createBlockingDto(formations, width, length, userId) {
+function createBlockingDto(name, formations, width, length, userId) {
     return {
+        'name': name,
         'formations': formations,
         'dimension': {
             'width': width,
             'length': length,
         },
         'createdBy': userId,
-        'createdAt': null
+        'createdAt': firebase.database.ServerValue.TIMESTAMP
     }
 }
 
