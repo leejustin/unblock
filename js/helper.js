@@ -61,3 +61,11 @@ function convertFormationsToDto(formations) {
     return convertedFormations;
 }
 
+function createAndStoreBlockingData(name, formations, width, length, userId) {
+    var convertedFormations = convertFormationsToDto(formations);
+    console.log(convertedFormations);
+    var convertedBlocking = createBlockingDto(name, convertedFormations, (width / SCALE_FACTOR), (length / SCALE_FACTOR), userId);
+    console.log(convertedBlocking);
+    return response = writeBlockingData(convertedBlocking);
+}
+
