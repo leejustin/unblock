@@ -88,10 +88,10 @@
             <!-- Settings -->
             <div class="col-md-6">
                 <span class="pull-right">
-                    <span class="setting-col">
+                    <span class="setting-col" id="loginCol">
                         <button id="loginButton" type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Log In</button>
                     </span>
-                <span class="setting-col">
+                    <span class="setting-col" id="logoutCol">
                         <button id="logoutButton" type="button" class="btn-link" onClick="signOutAndToast()">Log Out</button>
                     </span>
                 <!--
@@ -99,7 +99,7 @@
                         <button id="saveButton" type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Save</button>
                     </span>
                 -->
-                <span class="setting-col">
+                    <span class="setting-col">
                         <button id="shareButton" type="button" class="btn-link" data-toggle="modal" data-target="#shareModal" onClick="saveFormationHandler()">Share</button>
                     </span>
                 </span>

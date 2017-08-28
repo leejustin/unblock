@@ -10,13 +10,13 @@ initApp = function () {
             var phoneNumber = user.phoneNumber;
             var providerData = user.providerData;
             user.getIdToken().then(function (accessToken) {
-                $('#logoutButton').attr('style','display: visible');
-                $('#loginButton').attr('style','display: none');
+                $('#logoutCol').attr('style','display: visible');
+                $('#loginCol').attr('style','display: none');
             });
         } else {
             // User is signed out.
-            $('#logoutButton').attr('style','display: none');
-            $('#loginButton').attr('style','display: visible');
+            $('#logoutCol').attr('style','display: none');
+            $('#loginCol').attr('style','display: visible');
         }
     }, function (error) {
         console.log(error);
