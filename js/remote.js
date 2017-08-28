@@ -85,3 +85,19 @@ function saveFormationHandler() {
         console.log("user is not logged in");
     }
 }
+
+/* Store blocking data accordingly */
+function createAndStoreBlockingData(name, formations, width, length, userId) {
+    var convertedFormations = convertFormationsToDto(formations);
+    console.log(convertedFormations);
+    var convertedBlocking = createBlockingDto(name, convertedFormations, (width / SCALE_FACTOR), (length / SCALE_FACTOR), userId);
+    console.log(convertedBlocking);
+    
+    var response;
+    if (blockingIdExists()) {
+        updateBlockingData(convertedBlocking, BLOCKING_ID);
+    } else {
+        writeNewBlockingData(convertedBlocking);
+    }
+    return response;
+}
