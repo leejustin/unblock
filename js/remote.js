@@ -44,6 +44,8 @@ function writeNewBlockingData(data) {
         .push(data)
         .then(function (snapshot) {
             console.log("stored: " + snapshot.key);
+            //TODO: separate this logic to a controller thing
+            $('#shareLinkTextbox').val(window.location.href + "bid=" + snapshot.key);
         });
 }
 
@@ -52,7 +54,7 @@ function updateBlockingData(data, key) {
         .ref('blocking/' + key)
         .set(data)
         .then(function (snapshot) {
-            //console.log("stored: " + snapshot.key);                
+            //console.log("stored: " + snapshot.key);  
         });
 }
 

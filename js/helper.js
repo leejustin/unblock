@@ -2,6 +2,12 @@ function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
 
+//Click-to-copy share URL
+document.getElementById("copyButton").addEventListener("click", function() {
+    document.getElementById('shareLinkTextbox').select();
+    document.execCommand('copy');
+});
+
 /* jQuery Toasts */
 function toastFormationCreated() {
     toastr.success("New formation created!");
@@ -79,6 +85,5 @@ function createAndStoreBlockingData(name, formations, width, length, userId) {
     console.log(convertedFormations);
     var convertedBlocking = createBlockingDto(name, convertedFormations, (width / SCALE_FACTOR), (length / SCALE_FACTOR), userId);
     console.log(convertedBlocking);
-    return response = writeBlockingData(convertedBlocking);
+    return response = writeNewBlockingData(convertedBlocking);
 }
-

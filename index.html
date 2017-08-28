@@ -91,14 +91,14 @@
                     <span class="setting-col">
                         <button id="loginButton" type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Log In</button>
                     </span>
-                    <span class="setting-col">
+                <span class="setting-col">
                         <button id="logoutButton" type="button" class="btn-link" onClick="signOutAndToast()">Log Out</button>
                     </span>
-                    <span class="setting-col">
+                <span class="setting-col">
                         <button id="saveButton" type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Save</button>
                     </span>
-                    <span class="setting-col">
-                        <button id="shareButton" type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Share</button>
+                <span class="setting-col">
+                        <button id="shareButton" type="button" class="btn-link" data-toggle="modal" data-target="#shareModal" onClick="saveFormationHandler()">Share</button>
                     </span>
                 </span>
             </div>
@@ -181,6 +181,22 @@
                 </div>
                 <div class="modal-body">
                     <div id="firebaseui-auth-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="shareModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p>Share your blocking with this URL:</p>
+                    <input id="shareLinkTextbox" type="textbox" value="Loading..."></input>
+                    <button id="copyButton">Copy</button>
+                    <p>This link is view-only and not viewers cannot change your blocking.</p>
                 </div>
             </div>
         </div>

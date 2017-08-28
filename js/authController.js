@@ -27,3 +27,14 @@ window.addEventListener('load', function () {
     initApp()
 });
 
+function saveFormationHandler() {
+    var user = firebase.auth().currentUser;
+    
+    if (user) {
+        var userId = user.uid;
+        createAndStoreBlockingData("todoTempName", formations, stageSize, stageSize, userId);
+    } else {
+        //TODO
+        console.log("user is not logged in");
+    }
+}
