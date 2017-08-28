@@ -23,6 +23,12 @@ function toastSignedIn() {
     toastr.success("You are now signed in!");
 }
 
+//TODO: This should go in a controller
+function signOutAndToast() {
+    signOut();
+    toastr.info("You are now signed out");
+}
+
 /* Convert to JSON for DB */
 function createPersonDto(alias, x, y, z) {
     return {

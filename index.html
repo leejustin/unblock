@@ -25,49 +25,10 @@
 
     <!-- Initialize Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-    <script>
-        var config = {
-            apiKey: "AIzaSyDx60olv62NlQKn5XONx7HQbR4_Y1DHuA0",
-            authDomain: "blockthis-178103.firebaseapp.com",
-            databaseURL: "https://blockthis-178103.firebaseio.com",
-            projectId: "blockthis-178103",
-            storageBucket: "blockthis-178103.appspot.com",
-            messagingSenderId: "109334240835"
-        };
-        firebase.initializeApp(config);
-    </script>
 
     <!-- Firebase Auth UI -->
     <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
-
-    <script type="text/javascript">
-        // FirebaseUI config.
-        var uiConfig = {
-            signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            ],
-            tosUrl: '',
-            signInFlow: 'popup',
-            callbacks: {
-                signInSuccess: function (currentUser, credential, redirectUrl) {
-                    $('#signInModal').modal('hide');
-                    toastSignedIn();
-                    return false;
-                },
-                uiShown: function () {
-                }
-            }
-        };
-
-        // Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        // The start method will wait until the DOM is loaded.
-        ui.start('#firebaseui-auth-container', uiConfig);
-    </script>
 
     <script src="https://www.gstatic.com/firebasejs/ui/2.3.0/firebase-ui-auth__en.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/2.3.0/firebase-ui-auth.css" />
@@ -128,13 +89,16 @@
             <div class="col-md-6">
                 <span class="pull-right">
                     <span class="setting-col">
-                        <button type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Log In</button>
+                        <button id="loginButton" type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Log In</button>
                     </span>
                     <span class="setting-col">
-                        <button type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Save</button>
+                        <button id="logoutButton" type="button" class="btn-link" onClick="signOutAndToast()">Log Out</button>
                     </span>
                     <span class="setting-col">
-                        <button type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Share</button>
+                        <button id="saveButton" type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Save</button>
+                    </span>
+                    <span class="setting-col">
+                        <button id="shareButton" type="button" class="btn-link" data-toggle="modal" data-target="#signInModal">Share</button>
                     </span>
                 </span>
             </div>
@@ -213,7 +177,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title">Log In</h4>
                 </div>
                 <div class="modal-body">
                     <div id="firebaseui-auth-container"></div>
@@ -249,6 +213,7 @@
     <!-- Projecet js -->
     <script src="js/helper.js"></script>
     <script src="js/remote.js"></script>
+    <script src="js/loginController.js"></script>
     <script src="js/person.js"></script>
     <script src="js/formation.js"></script>
     <script src="js/stage.js"></script>

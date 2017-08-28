@@ -202,6 +202,8 @@ function testInitPersons() {
 }
 
 /******** END TESTING STUFF *************** */
+initDatabase();
+initLogin();
 
 /**********************
  * Render and Animate *
