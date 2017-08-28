@@ -29,6 +29,14 @@ function toastSignedIn() {
     toastr.success("You are now signed in!");
 }
 
+function toastSaveSuccess() {
+    toastr.success("Your blocking was saved!");
+}
+
+function toastNotLoggedIn() {
+    toastr.error("You must be logged in to perform this action");
+}
+
 //TODO: This should go in a controller
 function signOutAndToast() {
     signOut();

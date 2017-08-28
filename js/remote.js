@@ -80,9 +80,11 @@ function saveFormationHandler() {
     if (user) {
         var userId = user.uid;
         createAndStoreBlockingData("todoTempName", formations, stageSize, stageSize, userId);
+        toastSaveSuccess();
     } else {
         //TODO
         console.log("user is not logged in");
+        toastNotLoggedIn();
     }
 }
 
