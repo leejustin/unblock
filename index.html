@@ -42,7 +42,7 @@
             <div class="col-md-4">
                 <header>
                     <h4>Person</h4>
-                    <span class="glyphicon glyphicon-info-sign clickable" data-toggle="modal" data-target="#personHeaderModal"></span>
+                    <span class="glyphicon glyphicon-info-sign clickable big-icon" data-toggle="modal" data-target="#personHeaderModal"></span>
                 </header>
                 <button type="button" class="btn btn-primary" onclick="addPerson()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="removePerson(getSelectedPerson())">Remove</button>
@@ -51,7 +51,7 @@
             <div class="col-md-4">
                 <header>
                     <h4>Formation</h4>
-                    <span class="glyphicon glyphicon-info-sign clickable" data-toggle="modal" data-target="#formationHeaderModal"></span>
+                    <span class="glyphicon glyphicon-info-sign clickable big-icon" data-toggle="modal" data-target="#formationHeaderModal"></span>
                 </header>
                 <button type="button" class="btn btn-primary" onclick="createAndSetFormation()">Add</button>
                 <button type="button" class="btn btn-primary" onclick="" disabled>Remove</button>
@@ -59,7 +59,7 @@
             <div class="col-md-4">
                 <header>
                     <h4>Selection</h4>
-                    <span class="glyphicon glyphicon-info-sign clickable" data-toggle="modal" data-target="#selectionHeaderModal"></span>
+                    <span class="glyphicon glyphicon-info-sign clickable big-icon" data-toggle="modal" data-target="#selectionHeaderModal"></span>
                 </header>
                 <select id="formation-list" class="selectpicker" data-width="fit">
                     <option value="0">Formation 1</option>
@@ -195,7 +195,7 @@
                 <div class="modal-body">
                     <p>Share your blocking with this URL:</p>
                     <input id="shareLinkTextbox" type="textbox" value="Loading..."></input>
-                    <button id="copyButton">Copy</button>
+                    <span class="glyphicon glyphicon-copy clickable big-icon" id="copyButton"></span>
                     <p>This link is view-only and only you are able to change your blocking.</p>
                 </div>
             </div>

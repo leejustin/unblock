@@ -6,9 +6,13 @@ function isMobileDevice() {
 document.getElementById("copyButton").addEventListener("click", function () {
     document.getElementById('shareLinkTextbox').select();
     document.execCommand('copy');
+    toastClipboardCopied();
 });
 
 /* jQuery Toasts */
+function toastClipboardCopied() {
+    toastr.success("Copied to clipboard!");
+}
 function toastFormationCreated() {
     toastr.success("New formation created!");
 }
