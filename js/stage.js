@@ -14,8 +14,8 @@ var isAudienceView = false;
 let SCALE_FACTOR = 8;
 
 //Coordinates where a person will spawn
-let spawnPersonHorizontal = -12 * SCALE_FACTOR;
-let spawnPersonVertical = -12 * SCALE_FACTOR;
+let spawnPersonHorizontal = -1 * SCALE_FACTOR;
+let spawnPersonVertical = -1 * SCALE_FACTOR;
 
 let stageSize = 80 * SCALE_FACTOR;
 

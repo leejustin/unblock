@@ -20,8 +20,8 @@ var CAMERA_BIRD = {
   near: window.innerWidth / window.innerHeight,
   far: 1000 * SCALE_FACTOR,
   zoomX: 0 * SCALE_FACTOR,
-  zoomY: 40 * SCALE_FACTOR,
-  zoomZ: 40 * SCALE_FACTOR,
+  zoomY: 28 * SCALE_FACTOR,
+  zoomZ: 0.2 * SCALE_FACTOR,
 };
 
 var ORBIT_CONTROLS = {
