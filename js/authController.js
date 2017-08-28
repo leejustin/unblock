@@ -27,14 +27,25 @@ window.addEventListener('load', function () {
     initApp()
 });
 
-function saveFormationHandler() {
-    var user = firebase.auth().currentUser;
-    
-    if (user) {
-        var userId = user.uid;
-        createAndStoreBlockingData("todoTempName", formations, stageSize, stageSize, userId);
+function updateShareLinkTextbox(bid) {
+    var baseUrl = window.location.href.split('?')[0];
+    $('#shareLinkTextbox').val(baseUrl + "?bid=" + bid);
+}
+
+/* Retrieve and set the global variable for blocking id from the url params */
+function setBlockingId() {
+    var params = getAllUrlParams()
+    if (params.bid == null) {
+        BLOCKING_ID = null;
     } else {
-        //TODO
-        console.log("user is not logged in");
+        BLOCKING_ID = params.bid;
+    }
+}
+
+function blockingIdExists() {
+    if (BLOCKING_ID == null) {
+        return false;
+    } else {
+        return true;
     }
 }

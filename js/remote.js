@@ -43,9 +43,9 @@ function writeNewBlockingData(data) {
         .ref('blocking/')
         .push(data)
         .then(function (snapshot) {
-            console.log("stored: " + snapshot.key);
-            //TODO: separate this logic to a controller thing
-            $('#shareLinkTextbox').val(window.location.href + "bid=" + snapshot.key);
+            console.log("stored with key: " + snapshot.key);
+            updateShareLinkTextbox(snapshot.key);
+            BLOCKING_ID = snapshot.key;
         });
 }
 
@@ -54,7 +54,8 @@ function updateBlockingData(data, key) {
         .ref('blocking/' + key)
         .set(data)
         .then(function (snapshot) {
-            //console.log("stored: " + snapshot.key);  
+            console.log("updated for key: " + key);
+            updateShareLinkTextbox(key);
         });
 }
 
@@ -70,4 +71,17 @@ function retrieveBlockingData(id) {
 
 function signOut() {
     firebase.auth().signOut();
+}
+
+/* Called to actually write the data to DB */
+function saveFormationHandler() {
+    var user = firebase.auth().currentUser;
+    
+    if (user) {
+        var userId = user.uid;
+        createAndStoreBlockingData("todoTempName", formations, stageSize, stageSize, userId);
+    } else {
+        //TODO
+        console.log("user is not logged in");
+    }
 }

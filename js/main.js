@@ -56,6 +56,8 @@ var scene, camera, mouse, raycaster, renderer;
 // Plugins
 var controls, gui, objectTransformControl;
 
+var BLOCKING_ID;
+
 /***********************
  * Rendering Functions *
  ***********************/
@@ -202,6 +204,7 @@ function testInitPersons() {
 }
 
 /******** END TESTING STUFF *************** */
+setBlockingId();
 initDatabase();
 initLogin();
 
