@@ -92,6 +92,19 @@ function convertFormationsToDto(formations) {
     return convertedFormations;
 }
 
+function convertDtoToFormations(blockingData) {
+    var convertedFormations = blockingData['formations'];
+    var formationsToUse;
+    var personsToUse;
+
+    for (i = 0; i < convertedFormations.length; i++) {
+
+    }
+
+    formations
+    personArray = formations[0];
+}
+
 /* Used to grab URL params
  * Source: sitepoint.com/get-url-parameters-with-javascript
  * 
@@ -151,3 +164,33 @@ function getAllUrlParams(url) {
 
     return obj;
 }
+
+/* Dirty check to validate the pushId translates to a Unix timestamp that must exist */
+function validatePushId(pushId) {
+    var current = Math.round((new Date()).getTime() / 1000);
+    var past = 1504072000;
+
+    var checked = getTimestampFromId(pushId);
+    if (pushId > past && pushId <= current) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/* Convert a pushId to a Unix timestamp */
+// Source: https://gist.github.com/svincent/ae4eead8f7a97620e963/bfdf1a3deb13192cc2835d296b78c7076d29dacb
+var getTimestampFromId = (function () {
+    var PUSH_CHARS = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
+
+    return function getTime(id) {
+        return id.substr(0, 8)              // Only the first 8 bytes are deterministic
+            .split('')                        // We're going to operate on each index and combine the result
+            .map(function (cur) {               // Convert each character to it's numeric value
+                return PUSH_CHARS.indexOf(cur);
+            })
+            .reduce(function (prev, cur) {      // Combine all numeric values into a single integer (timestamp)
+                return prev * 64 + cur;
+            });
+    }
+})();
