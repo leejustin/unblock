@@ -167,11 +167,14 @@ function getAllUrlParams(url) {
 
 /* Dirty check to validate the pushId translates to a Unix timestamp that must exist */
 function validatePushId(pushId) {
-    var current = Math.round((new Date()).getTime() / 1000);
+    if (pushId.length != 20) {
+        return false;
+    }
+    var current = Math.round((new Date()).getTime());
     var past = 1504072000;
 
     var checked = getTimestampFromId(pushId);
-    if (pushId > past && pushId <= current) {
+    if (checked > past && checked <= current) {
         return true;
     } else {
         return false;

@@ -35,10 +35,11 @@ function updateShareLinkTextbox(bid) {
 /* Retrieve and set the global variable for blocking id from the url params */
 function setBlockingId() {
     var params = getAllUrlParams()
-    if (params.bid == null) {
-        BLOCKING_ID = null;
-    } else {
+    
+    if (params.bid != null && validatePushId(params.bid)) {
         BLOCKING_ID = params.bid;
+    } else {
+        BLOCKING_ID = null;
     }
 }
 
