@@ -171,7 +171,7 @@ function validatePushId(pushId) {
         return false;
     }
     var current = Math.round((new Date()).getTime());
-    var past = 1504072000;
+    var past = 1404072000;
 
     var checked = getTimestampFromId(pushId);
     if (checked > past && checked <= current) {

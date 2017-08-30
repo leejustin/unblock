@@ -213,3 +213,7 @@ initLogin();
  **********************/
 initializeScene();
 animateScene();
+
+if (BLOCKING_ID != null) {
+  retrieveBlockingData(BLOCKING_ID);
+}
