@@ -43,9 +43,9 @@ var RENDERER = {
   antialias: false,
 };
 
-let GRID_UNITS = 1 * SCALE_FACTOR;
+var GRID_UNITS = 1 * SCALE_FACTOR;
 
-let HEIGHT_PADDING = 0.75;
+var HEIGHT_PADDING = 0.75;
 
 /********************
  * Global Variables *

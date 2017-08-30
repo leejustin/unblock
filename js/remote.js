@@ -59,6 +59,7 @@ function updateBlockingData(data, key) {
         });
 }
 
+/* TODO: This also sets the blocking ID which shouldn't happen in a service layer */
 function retrieveBlockingData(id) {
     var postRef = firebase.database()
         .ref('/blocking/' + id)
@@ -66,6 +67,8 @@ function retrieveBlockingData(id) {
         .then(function (snapshot) {
             console.log("retrieved:");
             console.log(snapshot.val());
+            parseAndSetBlockingData(snapshot.val());
+            BLOCKING_ID = id;
         });
 }
 

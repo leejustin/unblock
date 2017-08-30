@@ -30,6 +30,8 @@ function clonePersonArray(personArrayToClone) {
 
 /* Redraws the entire board with person objects -- board should be cleared first */
 function initializePersons() {
+    console.log("HERE ARE THE FORMATIONS");
+    console.log(formations);
     if (formations.length < 1) {
         formations.push(personArray);
     }

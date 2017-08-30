@@ -2,20 +2,19 @@ var formations = [];
 var activeFormation = 0;
 
 /* Set the current formation to a new or existing one.  Return the index of the newly-created formation */
-function createAndSetFormation(formationIndex = null) {
+function createAndSetFormation(formationIndex = null, formationsToUse = formations) {
     var personArrayToUse;
 
-    if (formationIndex != null && formationIndex < formations.length) {
-        personArrayToUse = clonePersonArray(formations[formationIndex]);
+    if (formationIndex != null && formationIndex < formationsToUse.length) {
+        personArrayToUse = clonePersonArray(formationsToUse[formationIndex]);
         //console.log(personArrayToUse);
     } else {
         //personArrayToUse = new Array();
-        personArrayToUse = clonePersonArray(formations[activeFormation]);
+        personArrayToUse = clonePersonArray(formationsToUse[activeFormation]);
     }
 
     formations.push(personArrayToUse);
     var createdFormationIndex = formations.length - 1;
-    console.log("Created formation at index: " + createdFormationIndex);
 
     activeFormation = createdFormationIndex;
 
@@ -72,3 +71,45 @@ document.getElementById("formation-list").onchange = function () {
         return false
     }
 };
+
+/* Make a remote call to get the formations, parse it, and set it to the stage */
+// This is way too messy and manual data-rebinding and UI workarounds. Shows why raw jQuery is not the biz.
+function parseAndSetBlockingData(blockingData) {
+    var formationsToUse = parseBlockingFormationData(blockingData['formations']);
+
+    //Remove and replace the existing one
+    removeAllPersons();
+    formations = [];
+    formations.push(formationsToUse[0]);
+    personArray = formations[0];
+
+    //Initialize each of the formations
+    for (i = 1; i < formationsToUse.length; i++) {
+        createAndSetFormation(i, formationsToUse);
+    }
+
+    //Set the formation to the first one
+    setFormation(0);
+}
+
+/* Turn the remote JSON data into the same array format that we use for our formations */
+function parseBlockingFormationData(formationData) {
+    var formationsToUse = [];
+    
+    for (i = 0; i < formationData.length; i ++) {
+        var personArrayToUse = [];
+        if (formationData[i] != null) { //Empty gets stored as undefined in DB instead of empty array
+            for (j = 0; j < formationData[i].length; j++) {
+                var horiz = formationData[i][j]['position']['x'] * SCALE_FACTOR;
+                var vert = formationData[i][j]['position']['z'] * SCALE_FACTOR;
+                var alias = formationData[i][j]['alias'];
+
+                personArrayToUse.push(new Person(horiz, vert, alias));
+            }
+        } else {
+            personArrayToUse = [];
+        }
+        formationsToUse.push(personArrayToUse);
+    }
+    return formationsToUse;
+}
